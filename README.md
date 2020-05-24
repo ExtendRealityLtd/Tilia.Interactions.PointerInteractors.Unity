@@ -1,7 +1,7 @@
 [![Tilia logo][Tilia-Image]](#)
 
-> ### Tilia {scope} {feature} {platform?}
-> {Description of feature}.
+> ### Interactions -> Pointer Interactors for the Unity Software
+> Utilize ObjectPointers to initiate an Interactor grab on an Interactable for the Unity software.
 
 [![Release][Version-Release]][Releases]
 [![License][License-Badge]][License]
@@ -9,9 +9,9 @@
 
 ## Introduction
 
-{Introduction into the purpose of the feature.}
+Pointer Interactors provide a way of interacting with interactable objects via ObjectPointers, which provides the ability of interacting at distance without needing to be in touching range.
 
-> **Requires** {platform and minimum version number}.
+> **Requires** the Unity software version `2018.3.10f1` (or above).
 
 ## Getting Started
 
@@ -35,9 +35,9 @@ Please refer to the Extend Reality [Code of Conduct].
 
 Code released under the [MIT License][License].
 
-[License-Badge]: https://img.shields.io/github/license/ExtendRealityLtd/Tilia.{scope}.{feature}.{platform?}.svg
-[Version-Release]: https://img.shields.io/github/release/ExtendRealityLtd/Tilia.{scope}.{feature}.{platform?}.svg
-[project coding conventions]: https://github.com/ExtendRealityLtd/.github/blob/master/CONVENTIONS/{project_type}
+[License-Badge]: https://img.shields.io/github/license/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity.svg
+[Version-Release]: https://img.shields.io/github/release/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity.svg
+[project coding conventions]: https://github.com/ExtendRealityLtd/.github/blob/master/CONVENTIONS/UNITY3D.md
 
 [Tilia-Image]: https://user-images.githubusercontent.com/1029673/67681496-5bf10700-f985-11e9-9413-e61801b6eab5.png
 [License]: LICENSE.md
