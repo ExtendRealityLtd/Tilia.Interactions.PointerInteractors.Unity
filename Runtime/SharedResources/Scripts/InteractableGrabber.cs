@@ -4,7 +4,7 @@
     using Malimbe.MemberClearanceMethod;
     using Malimbe.PropertySerializationAttribute;
     using Malimbe.XmlDocumentationAttribute;
-    using Tilia.Interactions.Interactables;
+    using Tilia.Interactions.Interactables.Interactables;
     using Tilia.Interactions.Interactables.Interactors;
     using UnityEngine;
 

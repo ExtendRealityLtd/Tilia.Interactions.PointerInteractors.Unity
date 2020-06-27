@@ -3,7 +3,7 @@
     using Malimbe.PropertySerializationAttribute;
     using Malimbe.XmlDocumentationAttribute;
     using Tilia.Indicators.ObjectPointers;
-    using Tilia.Interactions.Interactables;
+    using Tilia.Interactions.Interactables.Interactables;
     using UnityEngine;
     using Zinnia.Action;
     using Zinnia.Data.Attribute;
