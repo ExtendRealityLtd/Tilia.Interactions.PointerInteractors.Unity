@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.10](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.0.9...v1.0.10) (2020-06-27)
+
+#### Bug Fixes
+
+* **Interactables:** update Interactables namespace to latest ([e9a2fb5](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/e9a2fb57a661380cf5c6d366da0f1771099b676f))
+  > The Interactables namespace changed in version 1.9.0 of the Interactables package, so it has been updated accordingly.
+
 ### [1.0.9](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.0.8...v1.0.9) (2020-06-21)
 
 #### Miscellaneous Chores
