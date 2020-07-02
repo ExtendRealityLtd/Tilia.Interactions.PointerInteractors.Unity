@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.11](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.0.10...v1.0.11) (2020-07-02)
+
+#### Bug Fixes
+
+* **Prefabs:** specify correct component for rule ([7bfe259](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/7bfe259ce1228fb2e87e66b2e382c49661353f59))
+  > The InteractableFacade component had been deleted from the rule due to the change in namespace and Unity did not automatically update the component to the new script namespace. This has now been fixed.
+
 ### [1.0.10](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.0.9...v1.0.10) (2020-06-27)
 
 #### Bug Fixes
