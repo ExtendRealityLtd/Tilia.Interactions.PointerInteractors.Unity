@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.0.11...v1.1.0) (2020-07-03)
+
+#### Features
+
+* **API:** add auto-generated API documentation ([23f92d2](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/23f92d2f27ad659f78d3e17333fdaa31aae1ab6c))
+  > The API documentation is auto generated with docfx and converted to markdown via turndown in a custom nodejs script.
+
+#### Bug Fixes
+
+* **package.json:** add docfx.json file ([04890bd](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/04890bd0c24b5ea35817bbcb42a21e0f97c83cfd))
+  > The docfx.json file was missing from the package.json causing the build process to fail. It has now been added.
+
 ### [1.0.11](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.0.10...v1.0.11) (2020-07-02)
 
 #### Bug Fixes
