@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.2.0](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.1.13...v1.2.0) (2020-08-14)
+
+#### Features
+
+* **Prefabs:** support precision grab offset ([b410162](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/b4101628e179279818cc217193dd58bd5248a91a))
+  > The Interactable precision grab offset is now supported when grabbing with the distance grabbing pointer by creating a temporary GameObject to use as the offset in the property applier.
+  > 
+  > The PropertyApplier also does not apply any rotation data now so the snap is positional only.
+
 ### [1.1.13](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.1.12...v1.1.13) (2020-07-28)
 
 #### Miscellaneous Chores
