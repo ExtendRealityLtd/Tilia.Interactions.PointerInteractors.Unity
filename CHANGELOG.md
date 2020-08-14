@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.3.0](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.2.0...v1.3.0) (2020-08-14)
+
+#### Features
+
+* **Prefabs:** add default rule to ignore special grab items ([dadfbbd](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/dadfbbdff8a1bc822db01f402633628b79369e2e))
+  > The StringInList rule is now being used as a default rule applied to the DistanceGrabber so the distance grabber by default ignores any Interactable that has a String Observable List with the element `specialgrab` in the list.
+  > 
+  > This can be used to automatically ignore certain Interactables from being able to be position grabbed.
+
+#### Bug Fixes
+
+* **Configuration:** add check to see if action is of follow type ([f4a3f25](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/f4a3f25339e7517b880e87ca58a1e3f615bd593c))
+  > There would be an error if the action was not of a follow type because the cast would automatically fail. This is fixed by not casting in the first instance and checking the type in the method.
+
 ## [1.2.0](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.1.13...v1.2.0) (2020-08-14)
 
 #### Features
