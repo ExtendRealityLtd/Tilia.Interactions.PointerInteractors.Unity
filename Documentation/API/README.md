@@ -12,7 +12,7 @@ The public interface into the DistanceGrabber Prefab.
 
 #### [InteractableGrabber]
 
-Attempts to grab the given interactable to the given interactor.
+Attempts to grab the given Interactable to the given Interactor.
 
 [DistanceGrabberConfigurator]: DistanceGrabberConfigurator.md
 [DistanceGrabberFacade]: DistanceGrabberFacade.md

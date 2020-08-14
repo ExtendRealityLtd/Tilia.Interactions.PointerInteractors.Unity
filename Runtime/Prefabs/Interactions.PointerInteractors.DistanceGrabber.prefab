@@ -80,6 +80,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7533518593231451648}
   - component: {fileID: 7533518593231451663}
+  - component: {fileID: 5499414486435190371}
   m_Layer: 0
   m_Name: GrabToInteractor
   m_TagString: Untagged
@@ -115,6 +116,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactor: {fileID: 0}
   interactable: {fileID: 0}
+  Grabbed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7533518594588224894}
+        m_MethodName: Receive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &5499414486435190371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7533518593231451649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f242ad1805431946acc4c338fa4d88b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Yielded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7533518593231451663}
+        m_MethodName: DoGrab
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  Cancelled:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &7533518593574485166
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,6 +335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facade: {fileID: 7533518594173930136}
+  alwaysCreateGrabPoint: 0
   pointer: {fileID: 5668053291574616488}
   grabber: {fileID: 7533518593231451663}
   propertyApplier: {fileID: 7533518594347027304}
@@ -5278,10 +5329,10 @@ MonoBehaviour:
     yState: 1
     zState: 1
   applyRotationOffsetOnAxis:
-    xState: 1
-    yState: 1
-    zState: 1
-  applyTransformations: 3
+    xState: 0
+    yState: 0
+    zState: 0
+  applyTransformations: 1
   transitionDuration: 0
   shouldApplyToEqualProperties: 1
   transitionDestinationThreshold: 0.01
@@ -5294,8 +5345,8 @@ MonoBehaviour:
   AfterTransformUpdated:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7533518593231451663}
-        m_MethodName: DoGrab
+      - m_Target: {fileID: 5499414486435190371}
+        m_MethodName: Begin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5355,6 +5406,17 @@ MonoBehaviour:
   Extracted:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 7533518594057795398}
+        m_MethodName: CreateGrabPoint
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 7533518594582477155}
         m_MethodName: DoExtract
         m_Mode: 0
@@ -5539,6 +5601,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 7533518593231451663}
         m_MethodName: ClearInteractable
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7533518594057795398}
+        m_MethodName: DestroyGrabPoint
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5969,6 +6042,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: Zinnia.Action.Action+BooleanUnityEvent, Zinnia.Runtime, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  initialValue: 0
   defaultValue: 0
   sources: []
   Activated:
@@ -6057,7 +6131,7 @@ PrefabInstance:
     - target: {fileID: 2748488038835702461, guid: 1950b2150beec924d9cff768bb4e815c,
         type: 3}
       propertyPath: Selected.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2748488038835702461, guid: 1950b2150beec924d9cff768bb4e815c,
         type: 3}
@@ -6068,11 +6142,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Selected.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 7533518594582477154}
     - target: {fileID: 2748488038835702461, guid: 1950b2150beec924d9cff768bb4e815c,
         type: 3}
       propertyPath: Selected.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: PrintString
+      value: DoExtract
       objectReference: {fileID: 0}
     - target: {fileID: 2748488038835702461, guid: 1950b2150beec924d9cff768bb4e815c,
         type: 3}
@@ -6082,7 +6156,7 @@ PrefabInstance:
     - target: {fileID: 2748488038835702461, guid: 1950b2150beec924d9cff768bb4e815c,
         type: 3}
       propertyPath: Selected.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: dfg
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3718142488040735482, guid: 1950b2150beec924d9cff768bb4e815c,
         type: 3}

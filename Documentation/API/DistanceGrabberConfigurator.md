@@ -8,8 +8,10 @@ Sets up the DistanceGrabber Prefab based on the provided user settings.
 * [Namespace]
 * [Syntax]
 * [Fields]
+  * [grabPoint]
   * [hasSubscribedToInteractorEvents]
 * [Properties]
+  * [AlwaysCreateGrabPoint]
   * [Facade]
   * [Grabber]
   * [GrabListener]
@@ -20,10 +22,13 @@ Sets up the DistanceGrabber Prefab based on the provided user settings.
   * [TargetValidityRules]
   * [UngrabListener]
 * [Methods]
+  * [CanCreateGrabPoint(GrabInteractableFollowAction)]
   * [ConfigureInteractor()]
   * [ConfigurePointerRules()]
   * [ConfigurePropertyApplier()]
   * [ConfigureReactivatePointerTimer()]
+  * [CreateGrabPoint(RaycastHit)]
+  * [DestroyGrabPoint()]
   * [OnDisable()]
   * [OnEnable()]
   * [PerformGrab(InteractableFacade)]
@@ -50,9 +55,19 @@ public class DistanceGrabberConfigurator : MonoBehaviour
 
 ### Fields
 
+#### grabPoint
+
+The point at which to use as the grab point offset for the transition.
+
+##### Declaration
+
+```
+protected GameObject grabPoint
+```
+
 #### hasSubscribedToInteractorEvents
 
-Whether the interactor events have been subscribed to.
+Whether the Interactor events have been subscribed to.
 
 ##### Declaration
 
@@ -61,6 +76,16 @@ protected bool hasSubscribedToInteractorEvents
 ```
 
 ### Properties
+
+#### AlwaysCreateGrabPoint
+
+Determines whether the grab point will be created always or only if the InteractableFacade has a follow action that is set to GrabInteractableFollowAction.OffsetType.PrecisionPoint.
+
+##### Declaration
+
+```
+public bool AlwaysCreateGrabPoint { get; set; }
+```
 
 #### Facade
 
@@ -94,7 +119,7 @@ public EmptyEventProxyEmitter GrabListener { get; protected set; }
 
 #### GrabProxy
 
-The BooleanAction that proxies the interactor's grab action.
+The BooleanAction that proxies the Interactor's grab action.
 
 ##### Declaration
 
@@ -114,7 +139,7 @@ public PointerFacade Pointer { get; protected set; }
 
 #### PropertyApplier
 
-The TransformPropertyApplier that transitions the interactable to the interactor.
+The TransformPropertyApplier that transitions the Interactable to the Interactor.
 
 ##### Declaration
 
@@ -154,9 +179,31 @@ public EmptyEventProxyEmitter UngrabListener { get; protected set; }
 
 ### Methods
 
+#### CanCreateGrabPoint(GrabInteractableFollowAction)
+
+Determines whether the grab point can be created for the given action.
+
+##### Declaration
+
+```
+protected virtual bool CanCreateGrabPoint(GrabInteractableFollowAction action)
+```
+
+##### Parameters
+
+| Type | Name | Description |
+| --- | --- | --- |
+| GrabInteractableFollowAction | action | The action to check whether a grab point can be created for. |
+
+##### Returns
+
+| Type | Description |
+| --- | --- |
+| System.Boolean | Whether the grab point can be created. |
+
 #### ConfigureInteractor()
 
-Configures the relevant components that require knowledge of the interactor.
+Configures the relevant components that require knowledge of the Interactor.
 
 ##### Declaration
 
@@ -194,6 +241,32 @@ Configures the reactivate pointer timer.
 public virtual void ConfigureReactivatePointerTimer()
 ```
 
+#### CreateGrabPoint(RaycastHit)
+
+Creates the grab point offset to transition the target Interactable towards.
+
+##### Declaration
+
+```
+public virtual void CreateGrabPoint(RaycastHit hitData)
+```
+
+##### Parameters
+
+| Type | Name | Description |
+| --- | --- | --- |
+| RaycastHit | hitData | The data to create the point with. |
+
+#### DestroyGrabPoint()
+
+Destroys any existing grab point.
+
+##### Declaration
+
+```
+public virtual void DestroyGrabPoint()
+```
+
 #### OnDisable()
 
 ##### Declaration
@@ -224,7 +297,7 @@ protected virtual void PerformGrab(InteractableFacade interactable)
 
 | Type | Name | Description |
 | --- | --- | --- |
-| InteractableFacade | interactable | The interactable being grabbed. |
+| InteractableFacade | interactable | The Interactable being grabbed. |
 
 #### PerformUngrab(InteractableFacade)
 
@@ -240,7 +313,7 @@ protected virtual void PerformUngrab(InteractableFacade interactable)
 
 | Type | Name | Description |
 | --- | --- | --- |
-| InteractableFacade | interactable | The interactable being grabbed. |
+| InteractableFacade | interactable | The Interactable being grabbed. |
 
 #### RegisterInteractorGrabListeners()
 
@@ -269,8 +342,10 @@ protected virtual void UnregisterInteractorGrabListeners()
 [Namespace]: #Namespace
 [Syntax]: #Syntax
 [Fields]: #Fields
+[grabPoint]: #grabPoint
 [hasSubscribedToInteractorEvents]: #hasSubscribedToInteractorEvents
 [Properties]: #Properties
+[AlwaysCreateGrabPoint]: #AlwaysCreateGrabPoint
 [Facade]: #Facade
 [Grabber]: #Grabber
 [GrabListener]: #GrabListener
@@ -281,10 +356,13 @@ protected virtual void UnregisterInteractorGrabListeners()
 [TargetValidityRules]: #TargetValidityRules
 [UngrabListener]: #UngrabListener
 [Methods]: #Methods
+[CanCreateGrabPoint(GrabInteractableFollowAction)]: #CanCreateGrabPointGrabInteractableFollowAction
 [ConfigureInteractor()]: #ConfigureInteractor
 [ConfigurePointerRules()]: #ConfigurePointerRules
 [ConfigurePropertyApplier()]: #ConfigurePropertyApplier
 [ConfigureReactivatePointerTimer()]: #ConfigureReactivatePointerTimer
+[CreateGrabPoint(RaycastHit)]: #CreateGrabPointRaycastHit
+[DestroyGrabPoint()]: #DestroyGrabPoint
 [OnDisable()]: #OnDisable
 [OnEnable()]: #OnEnable
 [PerformGrab(InteractableFacade)]: #PerformGrabInteractableFacade

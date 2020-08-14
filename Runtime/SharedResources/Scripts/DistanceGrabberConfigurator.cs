@@ -4,6 +4,7 @@
     using Malimbe.XmlDocumentationAttribute;
     using Tilia.Indicators.ObjectPointers;
     using Tilia.Interactions.Interactables.Interactables;
+    using Tilia.Interactions.Interactables.Interactables.Grab.Action;
     using UnityEngine;
     using Zinnia.Action;
     using Zinnia.Data.Attribute;
@@ -27,6 +28,15 @@
         public DistanceGrabberFacade Facade { get; protected set; }
         #endregion
 
+        #region Functionality Settings
+        /// <summary>
+        /// Determines whether the grab point will be created always or only if the <see cref="InteractableFacade"/> has a follow action that is set to <see cref="GrabInteractableFollowAction.OffsetType.PrecisionPoint"/>.
+        /// </summary>
+        [Serialized]
+        [field: Header("Functionality Settings"), DocumentedByXml]
+        public bool AlwaysCreateGrabPoint { get; set; }
+        #endregion
+
         #region Reference Settings
         /// <summary>
         /// The <see cref="PointerFacade"/> to initiate the grabbing.
@@ -41,7 +51,7 @@
         [field: DocumentedByXml, Restricted]
         public InteractableGrabber Grabber { get; protected set; }
         /// <summary>
-        /// The <see cref="TransformPropertyApplier"/> that transitions the interactable to the interactor.
+        /// The <see cref="TransformPropertyApplier"/> that transitions the Interactable to the Interactor.
         /// </summary>
         [Serialized]
         [field: DocumentedByXml, Restricted]
@@ -59,7 +69,7 @@
         [field: DocumentedByXml, Restricted]
         public EmptyEventProxyEmitter UngrabListener { get; protected set; }
         /// <summary>
-        /// The <see cref="BooleanAction"/> that proxies the interactor's grab action.
+        /// The <see cref="BooleanAction"/> that proxies the Interactor's grab action.
         /// </summary>
         [Serialized]
         [field: DocumentedByXml, Restricted]
@@ -79,12 +89,17 @@
         #endregion
 
         /// <summary>
-        /// Whether the interactor events have been subscribed to.
+        /// Whether the Interactor events have been subscribed to.
         /// </summary>
         protected bool hasSubscribedToInteractorEvents;
 
         /// <summary>
-        /// Configures the relevant components that require knowledge of the interactor.
+        /// The point at which to use as the grab point offset for the transition.
+        /// </summary>
+        protected GameObject grabPoint;
+
+        /// <summary>
+        /// Configures the relevant components that require knowledge of the Interactor.
         /// </summary>
         public virtual void ConfigureInteractor()
         {
@@ -132,6 +147,40 @@
             Pointer.RaycastRules = Facade.RaycastRules;
         }
 
+        /// <summary>
+        /// Creates the grab point offset to transition the target Interactable towards.
+        /// </summary>
+        /// <param name="hitData">The data to create the point with.</param>
+        public virtual void CreateGrabPoint(RaycastHit hitData)
+        {
+            InteractableFacade interactable = hitData.transform.gameObject.TryGetComponent<InteractableFacade>(true, true);
+            if (interactable == null)
+            {
+                return;
+            }
+
+            DestroyGrabPoint();
+
+            if (AlwaysCreateGrabPoint ||
+                CanCreateGrabPoint((GrabInteractableFollowAction)interactable.Configuration.GrabConfiguration.PrimaryAction) ||
+                CanCreateGrabPoint((GrabInteractableFollowAction)interactable.Configuration.GrabConfiguration.SecondaryAction))
+            {
+                grabPoint = new GameObject($"[Zinnia][GrabPointContainer][{hitData.transform.name}]");
+                grabPoint.transform.position = hitData.point;
+                grabPoint.transform.SetParent(hitData.transform);
+                PropertyApplier.Offset = grabPoint;
+            }
+        }
+
+        /// <summary>
+        /// Destroys any existing grab point.
+        /// </summary>
+        public virtual void DestroyGrabPoint()
+        {
+            PropertyApplier.Offset = null;
+            Destroy(grabPoint);
+        }
+
         protected virtual void OnEnable()
         {
             ConfigureInteractor();
@@ -143,6 +192,16 @@
         protected virtual void OnDisable()
         {
             UnregisterInteractorGrabListeners();
+        }
+
+        /// <summary>
+        /// Determines whether the grab point can be created for the given action.
+        /// </summary>
+        /// <param name="action">The action to check whether a grab point can be created for.</param>
+        /// <returns>Whether the grab point can be created.</returns>
+        protected virtual bool CanCreateGrabPoint(GrabInteractableFollowAction action)
+        {
+            return action != null && action.GrabOffset == GrabInteractableFollowAction.OffsetType.PrecisionPoint;
         }
 
         /// <summary>
@@ -174,7 +233,7 @@
         /// <summary>
         /// Performs the grab logic.
         /// </summary>
-        /// <param name="interactable">The interactable being grabbed.</param>
+        /// <param name="interactable">The Interactable being grabbed.</param>
         protected virtual void PerformGrab(InteractableFacade interactable)
         {
             GrabListener.Receive();
@@ -183,7 +242,7 @@
         /// <summary>
         /// Performs the ungrab logic.
         /// </summary>
-        /// <param name="interactable">The interactable being grabbed.</param>
+        /// <param name="interactable">The Interactable being grabbed.</param>
         protected virtual void PerformUngrab(InteractableFacade interactable)
         {
             UngrabListener.Receive();
