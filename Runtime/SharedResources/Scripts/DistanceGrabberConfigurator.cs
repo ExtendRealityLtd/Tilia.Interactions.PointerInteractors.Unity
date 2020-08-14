@@ -162,8 +162,8 @@
             DestroyGrabPoint();
 
             if (AlwaysCreateGrabPoint ||
-                CanCreateGrabPoint((GrabInteractableFollowAction)interactable.Configuration.GrabConfiguration.PrimaryAction) ||
-                CanCreateGrabPoint((GrabInteractableFollowAction)interactable.Configuration.GrabConfiguration.SecondaryAction))
+                CanCreateGrabPoint(interactable.Configuration.GrabConfiguration.PrimaryAction) ||
+                CanCreateGrabPoint(interactable.Configuration.GrabConfiguration.SecondaryAction))
             {
                 grabPoint = new GameObject($"[Zinnia][GrabPointContainer][{hitData.transform.name}]");
                 grabPoint.transform.position = hitData.point;
@@ -199,9 +199,15 @@
         /// </summary>
         /// <param name="action">The action to check whether a grab point can be created for.</param>
         /// <returns>Whether the grab point can be created.</returns>
-        protected virtual bool CanCreateGrabPoint(GrabInteractableFollowAction action)
+        protected virtual bool CanCreateGrabPoint(GrabInteractableAction action)
         {
-            return action != null && action.GrabOffset == GrabInteractableFollowAction.OffsetType.PrecisionPoint;
+            if (action == null || action.GetType() != typeof(GrabInteractableFollowAction))
+            {
+                return false;
+            }
+
+            GrabInteractableFollowAction followAction = (GrabInteractableFollowAction)action;
+            return followAction != null && followAction.GrabOffset == GrabInteractableFollowAction.OffsetType.PrecisionPoint;
         }
 
         /// <summary>
