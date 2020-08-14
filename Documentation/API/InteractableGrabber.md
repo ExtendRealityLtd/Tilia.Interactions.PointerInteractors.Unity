@@ -1,12 +1,14 @@
 # Class InteractableGrabber
 
-Attempts to grab the given interactable to the given interactor.
+Attempts to grab the given Interactable to the given Interactor.
 
 ## Contents
 
 * [Inheritance]
 * [Namespace]
 * [Syntax]
+* [Fields]
+  * [Grabbed]
 * [Properties]
   * [Interactable]
   * [Interactor]
@@ -30,11 +32,23 @@ Attempts to grab the given interactable to the given interactor.
 public class InteractableGrabber : MonoBehaviour
 ```
 
+### Fields
+
+#### Grabbed
+
+Emitted when the Grab has occurred.
+
+##### Declaration
+
+```
+public UnityEvent Grabbed
+```
+
 ### Properties
 
 #### Interactable
 
-The interactable to grab.
+The Interactable to grab.
 
 ##### Declaration
 
@@ -44,7 +58,7 @@ public InteractableFacade Interactable { get; set; }
 
 #### Interactor
 
-The interactor to grab to.
+The Interactor to grab to.
 
 ##### Declaration
 
@@ -70,6 +84,8 @@ public virtual void DoGrab()
 [Inheritance]: #Inheritance
 [Namespace]: #Namespace
 [Syntax]: #Syntax
+[Fields]: #Fields
+[Grabbed]: #Grabbed
 [Properties]: #Properties
 [Interactable]: #Interactable
 [Interactor]: #Interactor
