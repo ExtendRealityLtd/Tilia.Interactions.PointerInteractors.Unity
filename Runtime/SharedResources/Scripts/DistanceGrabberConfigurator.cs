@@ -103,7 +103,7 @@
         /// </summary>
         public virtual void ConfigureInteractor()
         {
-            Pointer.FollowSource = Facade.Interactor.gameObject;
+            Pointer.FollowSource = Facade.FollowSource != null ? Facade.FollowSource : Facade.Interactor.gameObject;
             Grabber.Interactor = Facade.Interactor;
             PropertyApplier.SetSource(Facade.Interactor.gameObject);
             GrabProxy.RunWhenActiveAndEnabled(() => GrabProxy.ClearSources());
