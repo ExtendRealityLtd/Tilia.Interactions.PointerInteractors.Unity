@@ -4,6 +4,7 @@
     using Malimbe.MemberClearanceMethod;
     using Malimbe.PropertySerializationAttribute;
     using Malimbe.XmlDocumentationAttribute;
+    using Tilia.Interactions.Interactables.Interactables;
     using Tilia.Interactions.Interactables.Interactors;
     using UnityEngine;
     using Zinnia.Cast;
@@ -65,6 +66,11 @@
         [field: Header("Reference Settings"), DocumentedByXml, Restricted]
         public DistanceGrabberConfigurator Configuration { get; protected set; }
         #endregion
+
+        /// <summary>
+        /// The current <see cref="InteractableFacade"/> being distance grabbed.
+        /// </summary>
+        public InteractableFacade CurrentInteractable => Configuration.Grabber.Interactable;
 
         /// <summary>
         /// Called after <see cref="Interactor"/> has been changed.

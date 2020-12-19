@@ -35,6 +35,12 @@
         [Serialized]
         [field: Header("Functionality Settings"), DocumentedByXml]
         public bool AlwaysCreateGrabPoint { get; set; }
+        /// <summary>
+        /// Forces the <see cref="InteractableFacade.InteractableRigidbody"/> to be kinematic during the transition.
+        /// </summary>
+        [Serialized]
+        [field: DocumentedByXml]
+        public bool ForceKinematicOnTransition { get; set; } = true;
         #endregion
 
         #region Reference Settings
@@ -92,11 +98,14 @@
         /// Whether the Interactor events have been subscribed to.
         /// </summary>
         protected bool hasSubscribedToInteractorEvents;
-
         /// <summary>
         /// The point at which to use as the grab point offset for the transition.
         /// </summary>
         protected GameObject grabPoint;
+        /// <summary>
+        /// The kinematic state of the <see cref="InteractableFacade.InteractableRigidbody"/> before the transition period.
+        /// </summary>
+        protected bool cachedKinematicState;
 
         /// <summary>
         /// Configures the relevant components that require knowledge of the Interactor.
@@ -179,6 +188,33 @@
         {
             PropertyApplier.Offset = null;
             Destroy(grabPoint);
+        }
+
+        /// <summary>
+        /// Makes the <see cref="InteractableFacade.InteractableRigidbody"/> kinematic.
+        /// </summary>
+        public virtual void MakeInteractableKinematic()
+        {
+            if (Facade.CurrentInteractable == null || !ForceKinematicOnTransition)
+            {
+                return;
+            }
+
+            cachedKinematicState = Facade.CurrentInteractable.InteractableRigidbody.isKinematic;
+            Facade.CurrentInteractable.InteractableRigidbody.isKinematic = true;
+        }
+
+        /// <summary>
+        /// Restores the <see cref="InteractableFacade.InteractableRigidbody"/> kinematic state to the value of <see cref="cachedKinematicState"/>.
+        /// </summary>
+        public virtual void RestoreCachedInteractableKinematicState()
+        {
+            if (Facade.CurrentInteractable == null || !ForceKinematicOnTransition)
+            {
+                return;
+            }
+
+            Facade.CurrentInteractable.InteractableRigidbody.isKinematic = cachedKinematicState;
         }
 
         protected virtual void OnEnable()
