@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.4.0](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.3.25...v1.4.0) (2020-12-20)
+
+#### Features
+
+* **Facade:** add optional follow source ([4959e0d](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/4959e0dc260a0c2981378b33bdec1cefa42028d3))
+  > The FollowSource property is an optional source that the distance grabber pointer can follow instead of having to follow the orientation of the Interactor it is assigned to. This makes it easier to orientate the pointer differently if need be.
+* **Prefab:** add ability to disable pointer on touch or transition ([faa0af9](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/faa0af9d4d5657da9edfbaa03396e8ded2cfcf72))
+  > A new feature to disable the pointer when the Interactor is touching the Interactable or the Interactable is in the transition state has been added.
+* **Prefab:** set interactable rigidbody to kinematic for transition ([d7bfe19](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/d7bfe19058141adb4ba41943cf98f1d284d9b7eb))
+  > The Interactable Rigidbody is now set to kinematic whilst the Interactable is transitioning to the Interactor. The kinematic state is restored just before the grab occurs or if the transition is cancelled.
+
 ### [1.3.25](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.3.24...v1.3.25) (2020-12-17)
 
 #### Miscellaneous Chores
