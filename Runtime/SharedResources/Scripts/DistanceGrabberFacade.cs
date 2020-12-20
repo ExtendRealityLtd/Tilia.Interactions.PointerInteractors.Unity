@@ -4,6 +4,7 @@
     using Malimbe.MemberClearanceMethod;
     using Malimbe.PropertySerializationAttribute;
     using Malimbe.XmlDocumentationAttribute;
+    using Tilia.Interactions.Interactables.Interactables;
     using Tilia.Interactions.Interactables.Interactors;
     using UnityEngine;
     using Zinnia.Cast;
@@ -23,7 +24,13 @@
         [field: Header("Interaction Settings"), DocumentedByXml]
         public InteractorFacade Interactor { get; set; }
         /// <summary>
-        /// The time in which it will take the interactable to transition to the interactor.
+        /// An optional source to get the internal pointer to follow. If one isn't provided then the <see cref="Interactor"/> will be used.
+        /// </summary>
+        [Serialized, Cleared]
+        [field: DocumentedByXml]
+        public GameObject FollowSource { get; set; }
+        /// <summary>
+        /// The time in which it will take the Interactable to transition to the Interactor.
         /// </summary>
         [Serialized]
         [field: DocumentedByXml]
@@ -44,7 +51,7 @@
         [field: Header("Pointer Settings"), DocumentedByXml]
         public RuleContainer TargetValidity { get; set; }
         /// <summary>
-        /// Determines the rules for the pointer raycast.
+        /// Determines the rules for the pointer RayCast.
         /// </summary>
         [Serialized, Cleared]
         [field: DocumentedByXml]
@@ -61,10 +68,24 @@
         #endregion
 
         /// <summary>
+        /// The current <see cref="InteractableFacade"/> being distance grabbed.
+        /// </summary>
+        public InteractableFacade CurrentInteractable => Configuration.Grabber.Interactable;
+
+        /// <summary>
         /// Called after <see cref="Interactor"/> has been changed.
         /// </summary>
         [CalledAfterChangeOf(nameof(Interactor))]
         protected virtual void OnAfterInteractorChange()
+        {
+            Configuration.ConfigureInteractor();
+        }
+
+        /// <summary>
+        /// Called after <see cref="FollowSource"/> has been changed.
+        /// </summary>
+        [CalledAfterChangeOf(nameof(FollowSource))]
+        protected virtual void OnAfterFollowSourceChange()
         {
             Configuration.ConfigureInteractor();
         }

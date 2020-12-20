@@ -8,33 +8,43 @@ Sets up the DistanceGrabber Prefab based on the provided user settings.
 * [Namespace]
 * [Syntax]
 * [Fields]
+  * [cachedKinematicState]
   * [grabPoint]
   * [hasSubscribedToInteractorEvents]
 * [Properties]
   * [AlwaysCreateGrabPoint]
+  * [DisablePointerOnInteractorTouch]
+  * [EnablePointerContainer]
   * [Facade]
+  * [ForceKinematicOnTransition]
   * [Grabber]
   * [GrabListener]
   * [GrabProxy]
   * [Pointer]
+  * [PointerContainer]
   * [PropertyApplier]
   * [ReactivatePointerTimer]
+  * [ShouldIgnoreEnablePointer]
   * [TargetValidityRules]
   * [UngrabListener]
 * [Methods]
-  * [CanCreateGrabPoint(GrabInteractableFollowAction)]
+  * [CanCreateGrabPoint(GrabInteractableAction)]
   * [ConfigureInteractor()]
   * [ConfigurePointerRules()]
   * [ConfigurePropertyApplier()]
   * [ConfigureReactivatePointerTimer()]
   * [CreateGrabPoint(RaycastHit)]
   * [DestroyGrabPoint()]
+  * [HasTouched(InteractableFacade)]
+  * [HasUntouched(InteractableFacade)]
+  * [MakeInteractableKinematic()]
   * [OnDisable()]
   * [OnEnable()]
   * [PerformGrab(InteractableFacade)]
   * [PerformUngrab(InteractableFacade)]
-  * [RegisterInteractorGrabListeners()]
-  * [UnregisterInteractorGrabListeners()]
+  * [RegisterInteractorListeners()]
+  * [RestoreCachedInteractableKinematicState()]
+  * [UnregisterInteractorListeners()]
 
 ## Details
 
@@ -54,6 +64,16 @@ public class DistanceGrabberConfigurator : MonoBehaviour
 ```
 
 ### Fields
+
+#### cachedKinematicState
+
+The kinematic state of the InteractableFacade.InteractableRigidbody before the transition period.
+
+##### Declaration
+
+```
+protected bool cachedKinematicState
+```
 
 #### grabPoint
 
@@ -87,6 +107,26 @@ Determines whether the grab point will be created always or only if the Interact
 public bool AlwaysCreateGrabPoint { get; set; }
 ```
 
+#### DisablePointerOnInteractorTouch
+
+Whether to disable the pointer logic when the Facade.Interactor touches the InteractableFacade.
+
+##### Declaration
+
+```
+public bool DisablePointerOnInteractorTouch { get; set; }
+```
+
+#### EnablePointerContainer
+
+The container for the logic that enables the pointer.
+
+##### Declaration
+
+```
+public GameObject EnablePointerContainer { get; protected set; }
+```
+
 #### Facade
 
 The public facade.
@@ -95,6 +135,16 @@ The public facade.
 
 ```
 public DistanceGrabberFacade Facade { get; protected set; }
+```
+
+#### ForceKinematicOnTransition
+
+Forces the InteractableFacade.InteractableRigidbody to be kinematic during the transition.
+
+##### Declaration
+
+```
+public bool ForceKinematicOnTransition { get; set; }
 ```
 
 #### Grabber
@@ -137,6 +187,16 @@ The PointerFacade to initiate the grabbing.
 public PointerFacade Pointer { get; protected set; }
 ```
 
+#### PointerContainer
+
+The containing GameObject of the pointer logic.
+
+##### Declaration
+
+```
+public GameObject PointerContainer { get; protected set; }
+```
+
 #### PropertyApplier
 
 The TransformPropertyApplier that transitions the Interactable to the Interactor.
@@ -155,6 +215,16 @@ The CountdownTimer that controls when the pointer is reactivated.
 
 ```
 public CountdownTimer ReactivatePointerTimer { get; protected set; }
+```
+
+#### ShouldIgnoreEnablePointer
+
+Whether to ignore the re-enabling of the pointer logic when the Facade.Interactor untouches.
+
+##### Declaration
+
+```
+public bool ShouldIgnoreEnablePointer { get; set; }
 ```
 
 #### TargetValidityRules
@@ -179,21 +249,21 @@ public EmptyEventProxyEmitter UngrabListener { get; protected set; }
 
 ### Methods
 
-#### CanCreateGrabPoint(GrabInteractableFollowAction)
+#### CanCreateGrabPoint(GrabInteractableAction)
 
 Determines whether the grab point can be created for the given action.
 
 ##### Declaration
 
 ```
-protected virtual bool CanCreateGrabPoint(GrabInteractableFollowAction action)
+protected virtual bool CanCreateGrabPoint(GrabInteractableAction action)
 ```
 
 ##### Parameters
 
 | Type | Name | Description |
 | --- | --- | --- |
-| GrabInteractableFollowAction | action | The action to check whether a grab point can be created for. |
+| GrabInteractableAction | action | The action to check whether a grab point can be created for. |
 
 ##### Returns
 
@@ -267,6 +337,48 @@ Destroys any existing grab point.
 public virtual void DestroyGrabPoint()
 ```
 
+#### HasTouched(InteractableFacade)
+
+Handles the Facade.Interactor touching state.
+
+##### Declaration
+
+```
+protected virtual void HasTouched(InteractableFacade interactable)
+```
+
+##### Parameters
+
+| Type | Name | Description |
+| --- | --- | --- |
+| InteractableFacade | interactable | The Interactable being touched. |
+
+#### HasUntouched(InteractableFacade)
+
+Handles the Facade.Interactor untouching state.
+
+##### Declaration
+
+```
+protected virtual void HasUntouched(InteractableFacade interactable)
+```
+
+##### Parameters
+
+| Type | Name | Description |
+| --- | --- | --- |
+| InteractableFacade | interactable | The Interactable being touched. |
+
+#### MakeInteractableKinematic()
+
+Makes the InteractableFacade.InteractableRigidbody kinematic.
+
+##### Declaration
+
+```
+public virtual void MakeInteractableKinematic()
+```
+
 #### OnDisable()
 
 ##### Declaration
@@ -315,57 +427,78 @@ protected virtual void PerformUngrab(InteractableFacade interactable)
 | --- | --- | --- |
 | InteractableFacade | interactable | The Interactable being grabbed. |
 
-#### RegisterInteractorGrabListeners()
+#### RegisterInteractorListeners()
 
-Registers the Interactor Grab listeners.
-
-##### Declaration
-
-```
-protected virtual void RegisterInteractorGrabListeners()
-```
-
-#### UnregisterInteractorGrabListeners()
-
-Unregisters the Interactor Grab listeners.
+Registers the Interactor listeners.
 
 ##### Declaration
 
 ```
-protected virtual void UnregisterInteractorGrabListeners()
+protected virtual void RegisterInteractorListeners()
+```
+
+#### RestoreCachedInteractableKinematicState()
+
+Restores the InteractableFacade.InteractableRigidbody kinematic state to the value of [cachedKinematicState].
+
+##### Declaration
+
+```
+public virtual void RestoreCachedInteractableKinematicState()
+```
+
+#### UnregisterInteractorListeners()
+
+Unregisters the Interactor listeners.
+
+##### Declaration
+
+```
+protected virtual void UnregisterInteractorListeners()
 ```
 
 [Tilia.Interactions.PointerInteractors]: README.md
 [DistanceGrabberFacade]: DistanceGrabberFacade.md
 [InteractableGrabber]: InteractableGrabber.md
+[cachedKinematicState]: DistanceGrabberConfigurator.md#cachedKinematicState
 [Inheritance]: #Inheritance
 [Namespace]: #Namespace
 [Syntax]: #Syntax
 [Fields]: #Fields
+[cachedKinematicState]: #cachedKinematicState
 [grabPoint]: #grabPoint
 [hasSubscribedToInteractorEvents]: #hasSubscribedToInteractorEvents
 [Properties]: #Properties
 [AlwaysCreateGrabPoint]: #AlwaysCreateGrabPoint
+[DisablePointerOnInteractorTouch]: #DisablePointerOnInteractorTouch
+[EnablePointerContainer]: #EnablePointerContainer
 [Facade]: #Facade
+[ForceKinematicOnTransition]: #ForceKinematicOnTransition
 [Grabber]: #Grabber
 [GrabListener]: #GrabListener
 [GrabProxy]: #GrabProxy
 [Pointer]: #Pointer
+[PointerContainer]: #PointerContainer
 [PropertyApplier]: #PropertyApplier
 [ReactivatePointerTimer]: #ReactivatePointerTimer
+[ShouldIgnoreEnablePointer]: #ShouldIgnoreEnablePointer
 [TargetValidityRules]: #TargetValidityRules
 [UngrabListener]: #UngrabListener
 [Methods]: #Methods
-[CanCreateGrabPoint(GrabInteractableFollowAction)]: #CanCreateGrabPointGrabInteractableFollowAction
+[CanCreateGrabPoint(GrabInteractableAction)]: #CanCreateGrabPointGrabInteractableAction
 [ConfigureInteractor()]: #ConfigureInteractor
 [ConfigurePointerRules()]: #ConfigurePointerRules
 [ConfigurePropertyApplier()]: #ConfigurePropertyApplier
 [ConfigureReactivatePointerTimer()]: #ConfigureReactivatePointerTimer
 [CreateGrabPoint(RaycastHit)]: #CreateGrabPointRaycastHit
 [DestroyGrabPoint()]: #DestroyGrabPoint
+[HasTouched(InteractableFacade)]: #HasTouchedInteractableFacade
+[HasUntouched(InteractableFacade)]: #HasUntouchedInteractableFacade
+[MakeInteractableKinematic()]: #MakeInteractableKinematic
 [OnDisable()]: #OnDisable
 [OnEnable()]: #OnEnable
 [PerformGrab(InteractableFacade)]: #PerformGrabInteractableFacade
 [PerformUngrab(InteractableFacade)]: #PerformUngrabInteractableFacade
-[RegisterInteractorGrabListeners()]: #RegisterInteractorGrabListeners
-[UnregisterInteractorGrabListeners()]: #UnregisterInteractorGrabListeners
+[RegisterInteractorListeners()]: #RegisterInteractorListeners
+[RestoreCachedInteractableKinematicState()]: #RestoreCachedInteractableKinematicState
+[UnregisterInteractorListeners()]: #UnregisterInteractorListeners

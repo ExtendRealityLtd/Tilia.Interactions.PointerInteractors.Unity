@@ -35,14 +35,32 @@
         [Serialized]
         [field: Header("Functionality Settings"), DocumentedByXml]
         public bool AlwaysCreateGrabPoint { get; set; }
+        /// <summary>
+        /// Forces the <see cref="InteractableFacade.InteractableRigidbody"/> to be kinematic during the transition.
+        /// </summary>
+        [Serialized]
+        [field: DocumentedByXml]
+        public bool ForceKinematicOnTransition { get; set; } = true;
+        /// <summary>
+        /// Whether to disable the pointer logic when the <see cref="Facade.Interactor"/> touches the <see cref="InteractableFacade"/>.
+        /// </summary>
+        [Serialized]
+        [field: DocumentedByXml]
+        public bool DisablePointerOnInteractorTouch { get; set; } = true;
         #endregion
 
         #region Reference Settings
         /// <summary>
-        /// The <see cref="PointerFacade"/> to initiate the grabbing.
+        /// The containing <see cref="GameObject"/> of the pointer logic.
         /// </summary>
         [Serialized]
         [field: Header("Reference Settings"), DocumentedByXml, Restricted]
+        public GameObject PointerContainer { get; protected set; }
+        /// <summary>
+        /// The <see cref="PointerFacade"/> to initiate the grabbing.
+        /// </summary>
+        [Serialized]
+        [field: DocumentedByXml, Restricted]
         public PointerFacade Pointer { get; protected set; }
         /// <summary>
         /// The <see cref="InteractableGrabber"/> that initiates the grabbing.
@@ -81,6 +99,12 @@
         [field: DocumentedByXml, Restricted]
         public CountdownTimer ReactivatePointerTimer { get; protected set; }
         /// <summary>
+        /// The container for the logic that enables the pointer.
+        /// </summary>
+        [Serialized]
+        [field: DocumentedByXml, Restricted]
+        public GameObject EnablePointerContainer { get; protected set; }
+        /// <summary>
         /// The <see cref="RuleContainerObservableList"/> that controls pointer target validity.
         /// </summary>
         [Serialized]
@@ -89,28 +113,36 @@
         #endregion
 
         /// <summary>
+        /// Whether to ignore the re-enabling of the pointer logic when the <see cref="Facade.Interactor"/> untouches.
+        /// </summary>
+        public bool ShouldIgnoreEnablePointer { get; set; }
+
+        /// <summary>
         /// Whether the Interactor events have been subscribed to.
         /// </summary>
         protected bool hasSubscribedToInteractorEvents;
-
         /// <summary>
         /// The point at which to use as the grab point offset for the transition.
         /// </summary>
         protected GameObject grabPoint;
+        /// <summary>
+        /// The kinematic state of the <see cref="InteractableFacade.InteractableRigidbody"/> before the transition period.
+        /// </summary>
+        protected bool cachedKinematicState;
 
         /// <summary>
         /// Configures the relevant components that require knowledge of the Interactor.
         /// </summary>
         public virtual void ConfigureInteractor()
         {
-            Pointer.FollowSource = Facade.Interactor.gameObject;
+            Pointer.FollowSource = Facade.FollowSource != null ? Facade.FollowSource : Facade.Interactor.gameObject;
             Grabber.Interactor = Facade.Interactor;
             PropertyApplier.SetSource(Facade.Interactor.gameObject);
             GrabProxy.RunWhenActiveAndEnabled(() => GrabProxy.ClearSources());
             GrabProxy.RunWhenActiveAndEnabled(() => GrabProxy.AddSource(Facade.Interactor.GrabAction));
 
-            UnregisterInteractorGrabListeners();
-            RegisterInteractorGrabListeners();
+            UnregisterInteractorListeners();
+            RegisterInteractorListeners();
         }
 
         /// <summary>
@@ -181,6 +213,33 @@
             Destroy(grabPoint);
         }
 
+        /// <summary>
+        /// Makes the <see cref="InteractableFacade.InteractableRigidbody"/> kinematic.
+        /// </summary>
+        public virtual void MakeInteractableKinematic()
+        {
+            if (Facade.CurrentInteractable == null || !ForceKinematicOnTransition)
+            {
+                return;
+            }
+
+            cachedKinematicState = Facade.CurrentInteractable.InteractableRigidbody.isKinematic;
+            Facade.CurrentInteractable.InteractableRigidbody.isKinematic = true;
+        }
+
+        /// <summary>
+        /// Restores the <see cref="InteractableFacade.InteractableRigidbody"/> kinematic state to the value of <see cref="cachedKinematicState"/>.
+        /// </summary>
+        public virtual void RestoreCachedInteractableKinematicState()
+        {
+            if (Facade.CurrentInteractable == null || !ForceKinematicOnTransition)
+            {
+                return;
+            }
+
+            Facade.CurrentInteractable.InteractableRigidbody.isKinematic = cachedKinematicState;
+        }
+
         protected virtual void OnEnable()
         {
             ConfigureInteractor();
@@ -191,7 +250,7 @@
 
         protected virtual void OnDisable()
         {
-            UnregisterInteractorGrabListeners();
+            UnregisterInteractorListeners();
         }
 
         /// <summary>
@@ -211,12 +270,14 @@
         }
 
         /// <summary>
-        /// Registers the Interactor Grab listeners.
+        /// Registers the Interactor listeners.
         /// </summary>
-        protected virtual void RegisterInteractorGrabListeners()
+        protected virtual void RegisterInteractorListeners()
         {
             if (Facade.Interactor != null)
             {
+                Facade.Interactor.Touched.AddListener(HasTouched);
+                Facade.Interactor.Untouched.AddListener(HasUntouched);
                 Facade.Interactor.Grabbed.AddListener(PerformGrab);
                 Facade.Interactor.Ungrabbed.AddListener(PerformUngrab);
                 hasSubscribedToInteractorEvents = true;
@@ -224,16 +285,48 @@
         }
 
         /// <summary>
-        /// Unregisters the Interactor Grab listeners.
+        /// Unregisters the Interactor listeners.
         /// </summary>
-        protected virtual void UnregisterInteractorGrabListeners()
+        protected virtual void UnregisterInteractorListeners()
         {
             if (hasSubscribedToInteractorEvents)
             {
+                Facade.Interactor.Touched.RemoveListener(HasTouched);
+                Facade.Interactor.Untouched.RemoveListener(HasUntouched);
                 Facade.Interactor.Grabbed.RemoveListener(PerformGrab);
                 Facade.Interactor.Ungrabbed.RemoveListener(PerformUngrab);
                 hasSubscribedToInteractorEvents = false;
             }
+        }
+
+        /// <summary>
+        /// Handles the <see cref="Facade.Interactor"/> touching state.
+        /// </summary>
+        /// <param name="interactable">The Interactable being touched.</param>
+        protected virtual void HasTouched(InteractableFacade interactable)
+        {
+            if (!DisablePointerOnInteractorTouch)
+            {
+                return;
+            }
+
+            PointerContainer.SetActive(false);
+            EnablePointerContainer.SetActive(false);
+        }
+
+        /// <summary>
+        /// Handles the <see cref="Facade.Interactor"/> untouching state.
+        /// </summary>
+        /// <param name="interactable">The Interactable being touched.</param>
+        protected virtual void HasUntouched(InteractableFacade interactable)
+        {
+            EnablePointerContainer.SetActive(true);
+            if (!DisablePointerOnInteractorTouch || ShouldIgnoreEnablePointer)
+            {
+                return;
+            }
+
+            PointerContainer.SetActive(true);
         }
 
         /// <summary>
@@ -242,6 +335,7 @@
         /// <param name="interactable">The Interactable being grabbed.</param>
         protected virtual void PerformGrab(InteractableFacade interactable)
         {
+            ShouldIgnoreEnablePointer = true;
             GrabListener.Receive();
         }
 
