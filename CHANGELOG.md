@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.4.3...v1.5.0) (2020-12-22)
+
+#### Features
+
+* **HowToGuides:** add guide on how to add a distance grabber ([708cfbb](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/708cfbbd77eb21bbb6d40859e7d5d09896303b40))
+  > The new how to guide shows how to add and configure a distance grabber prefab for grabbing interactable objects at distance.
+
 ### [1.4.3](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.4.2...v1.4.3) (2020-12-21)
 
 #### Miscellaneous Chores
