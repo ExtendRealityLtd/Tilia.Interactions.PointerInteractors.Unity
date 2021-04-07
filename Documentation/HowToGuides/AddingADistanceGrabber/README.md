@@ -21,9 +21,7 @@ The `Interactions.PointerInteractors.DistanceGrabber` prefab allows for an easy 
 
 ### Step 1
 
-Expand the `Tilia Interactions PointerInteractors Unity` package directory in the Unity Project window and select the `Packages -> Tilia Interactions PointerInteractors Unity -> Runtime -> Prefabs` directory then drag and drop the `Interactions.PointerInteractors.DistanceGrabber` prefab into the Unity Hierarchy window.
-
-![Adding Prefab To Scene](assets/images/AddingPrefabToScene.png)
+Add a `Interactions.PointerInteractors.DistanceGrabber` prefab to the Unity project hierarchy by selecting `GameObject -> Tilia -> Prefabs -> Interactions -> Interactors -> Interactions.PointerInteractors.DistanceGrabber` from the Unity main top menu.
 
 ### Step 2
 
@@ -43,7 +41,7 @@ Play the Unity scene and point your hand at the Interactable cube, you should se
 
 ### Step 4
 
-We can now isntantly snap the Interactable cube directly to our Interactor, but what if we wanted a nice timely transition of the Interactable cube flying through the air to our Interactor as if we were willing it there with our mind?
+We can now instantly snap the Interactable cube directly to our Interactor, but what if we wanted a nice timely transition of the Interactable cube flying through the air to our Interactor as if we were willing it there with our mind?
 
 Well, this is simple to achieve by just increasing the `Transition Duration` property on the `Distance Grabber Facade` component. The a higher duration means the selected Interactable will take that long to reach the grabbing Interactor.
 

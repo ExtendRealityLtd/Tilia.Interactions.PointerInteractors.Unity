@@ -2,6 +2,6 @@
 
 <Weavers>
   <Malimbe.FodyRunner>
-    <AssemblyNameRegex>^Tilia</AssemblyNameRegex>
+    <AssemblyNameRegex>^Tilia.Interactions.PointerInteractors</AssemblyNameRegex>
   </Malimbe.FodyRunner>
 </Weavers>
