@@ -4,6 +4,7 @@
     using Malimbe.MemberClearanceMethod;
     using Malimbe.PropertySerializationAttribute;
     using Malimbe.XmlDocumentationAttribute;
+    using System;
     using Tilia.Interactions.Interactables.Interactables;
     using Tilia.Interactions.Interactables.Interactors;
     using UnityEngine;
@@ -14,6 +15,12 @@
     /// </summary>
     public class InteractableGrabber : MonoBehaviour
     {
+        /// <summary>
+        /// Defines the event with the <see cref="InteractableFacade"/>.
+        /// </summary>
+        [Serializable]
+        public class UnityEvent : UnityEvent<InteractableFacade> { }
+
         /// <summary>
         /// The Interactor to grab to.
         /// </summary>
@@ -30,6 +37,7 @@
         /// <summary>
         /// Emitted when the Grab has occurred.
         /// </summary>
+        [DocumentedByXml]
         public UnityEvent Grabbed = new UnityEvent();
 
         /// <summary>
@@ -43,8 +51,10 @@
                 return;
             }
 
+            Interactable.Ungrab();
+
             Interactor.Grab(Interactable);
-            Grabbed?.Invoke();
+            Grabbed?.Invoke(Interactable);
         }
     }
 }

@@ -164,6 +164,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 098fc6c54c3792e49837be0f531aa588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Obtained:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Zinnia.Rule.Collection.RuleContainerObservableList+UnityEvent, Zinnia.Runtime,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   Found:
     m_PersistentCalls:
       m_Calls: []
@@ -277,6 +282,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 7533518594070652894}
         m_MethodName: Begin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7533518594057795398}
+        m_MethodName: NotifyGrabCanceled
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -429,8 +445,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+      - m_Target: {fileID: 7533518594057795398}
+        m_MethodName: NotifyAfterGrabbed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Tilia.Interactions.PointerInteractors.InteractableGrabber+UnityEvent,
+      Tilia.Interactions.PointerInteractors.Unity.Runtime, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &5499414486435190371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,6 +579,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ba4f67a3d5e83e42a9ed87d4eb156d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Obtained:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Zinnia.Data.Collection.List.SerializableTypeBehaviourObservableList+UnityEvent,
+      Zinnia.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   Found:
     m_PersistentCalls:
       m_Calls: []
@@ -655,6 +688,7 @@ MonoBehaviour:
   grabListener: {fileID: 7533518595083042311}
   ungrabListener: {fileID: 7533518593124272223}
   grabProxy: {fileID: 7533518595176635480}
+  grabProxyActions: {fileID: 431940976625598158}
   reactivatePointerTimer: {fileID: 7533518594070652894}
   enablePointerContainer: {fileID: 3588313746156001542}
   targetValidityRules: {fileID: 7533518595170314445}
@@ -860,6 +894,24 @@ MonoBehaviour:
   targetValidity:
     field: {fileID: 7393450506313436259}
   raycastRules: {fileID: 0}
+  BeforeGrabbed:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Tilia.Interactions.PointerInteractors.DistanceGrabberFacade+UnityEvent,
+      Tilia.Interactions.PointerInteractors.Unity.Runtime, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  GrabCanceled:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Tilia.Interactions.PointerInteractors.DistanceGrabberFacade+UnityEvent,
+      Tilia.Interactions.PointerInteractors.Unity.Runtime, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  AfterGrabbed:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Tilia.Interactions.PointerInteractors.DistanceGrabberFacade+UnityEvent,
+      Tilia.Interactions.PointerInteractors.Unity.Runtime, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   configuration: {fileID: 7533518594057795398}
 --- !u!114 &7393450506313436259
 MonoBehaviour:
@@ -932,6 +984,7 @@ GameObject:
   - component: {fileID: 7533518594267312793}
   - component: {fileID: 7533518594267312487}
   - component: {fileID: 7533518594267312792}
+  - component: {fileID: 1741061030070668559}
   m_Layer: 0
   m_Name: Crosshair
   m_TagString: Untagged
@@ -948,7 +1001,7 @@ Transform:
   m_GameObject: {fileID: 7533518594267312794}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.001, z: 1}
   m_Children: []
   m_Father: {fileID: 2867700843622583597}
   m_RootOrder: 1
@@ -2404,7 +2457,7 @@ ParticleSystem:
     flipU: 0
     flipV: 0
   VelocityModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -2461,7 +2514,7 @@ ParticleSystem:
     y:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 10
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -5596,7 +5649,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_RenderMode: 0
+  m_RenderMode: 4
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 1
@@ -5606,7 +5659,7 @@ ParticleSystemRenderer:
   m_SortingFudge: 0
   m_NormalDirection: 0
   m_ShadowBias: 0
-  m_RenderAlignment: 3
+  m_RenderAlignment: 2
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
   m_UseCustomVertexStreams: 0
@@ -5619,6 +5672,19 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &1741061030070668559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7533518594267312794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc2d46c695564b1dae524f8cb1455301, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 7533518594267312794}
 --- !u!1 &7533518594347027306
 GameObject:
   m_ObjectHideFlags: 0
@@ -5721,17 +5787,6 @@ MonoBehaviour:
   AfterTransformUpdated:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7533518594057795398}
-        m_MethodName: set_IsTransitioning
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 7533518594057795398}
         m_MethodName: RestoreCachedInteractableKinematicState
         m_Mode: 1
@@ -5908,6 +5963,17 @@ MonoBehaviour:
   Extracted:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 7533518594057795398}
+        m_MethodName: NotifyBeforeGrabbed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 7533518593231451663}
         m_MethodName: set_Interactable
         m_Mode: 0
@@ -6193,6 +6259,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45641bb26f54b8d4797b08b74c29645c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Obtained:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Zinnia.Data.Collection.List.BehaviourObservableList+UnityEvent, Zinnia.Runtime,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   Found:
     m_PersistentCalls:
       m_Calls: []
@@ -6349,6 +6420,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 098fc6c54c3792e49837be0f531aa588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Obtained:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Zinnia.Rule.Collection.RuleContainerObservableList+UnityEvent, Zinnia.Runtime,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   Found:
     m_PersistentCalls:
       m_Calls: []
@@ -6617,6 +6693,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4314037140793392826, guid: 1950b2150beec924d9cff768bb4e815c,
+        type: 3}
+      propertyPath: ResultsChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314037140793392826, guid: 1950b2150beec924d9cff768bb4e815c,
+        type: 3}
+      propertyPath: ResultsChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314037140793392826, guid: 1950b2150beec924d9cff768bb4e815c,
+        type: 3}
+      propertyPath: ResultsChanged.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314037140793392826, guid: 1950b2150beec924d9cff768bb4e815c,
+        type: 3}
+      propertyPath: ResultsChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1741061030070668559}
+    - target: {fileID: 4314037140793392826, guid: 1950b2150beec924d9cff768bb4e815c,
+        type: 3}
+      propertyPath: ResultsChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: HandleData
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314037140793392826, guid: 1950b2150beec924d9cff768bb4e815c,
+        type: 3}
+      propertyPath: ResultsChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8201054935352871865, guid: 1950b2150beec924d9cff768bb4e815c,
         type: 3}
       propertyPath: elementVisibility
@@ -6639,18 +6745,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1950b2150beec924d9cff768bb4e815c, type: 3}
---- !u!4 &6563171667001682415 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3718142488040735482, guid: 1950b2150beec924d9cff768bb4e815c,
-    type: 3}
-  m_PrefabInstance: {fileID: 7533518593267313429}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2867700843622583597 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5710689148756158008, guid: 1950b2150beec924d9cff768bb4e815c,
-    type: 3}
-  m_PrefabInstance: {fileID: 7533518593267313429}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5668053291574616488 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2748488038835702461, guid: 1950b2150beec924d9cff768bb4e815c,
@@ -6663,3 +6757,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94b64be7011dbb64db38b1b10ab3057b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &2867700843622583597 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5710689148756158008, guid: 1950b2150beec924d9cff768bb4e815c,
+    type: 3}
+  m_PrefabInstance: {fileID: 7533518593267313429}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6563171667001682415 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3718142488040735482, guid: 1950b2150beec924d9cff768bb4e815c,
+    type: 3}
+  m_PrefabInstance: {fileID: 7533518593267313429}
+  m_PrefabAsset: {fileID: 0}

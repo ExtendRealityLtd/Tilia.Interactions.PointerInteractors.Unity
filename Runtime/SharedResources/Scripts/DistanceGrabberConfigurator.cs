@@ -2,6 +2,8 @@
 {
     using Malimbe.PropertySerializationAttribute;
     using Malimbe.XmlDocumentationAttribute;
+    using System.Collections;
+    using System.Collections.Generic;
     using Tilia.Indicators.ObjectPointers;
     using Tilia.Interactions.Interactables.Interactables;
     using Tilia.Interactions.Interactables.Interactables.Grab.Action;
@@ -93,6 +95,12 @@
         [field: DocumentedByXml, Restricted]
         public BooleanAction GrabProxy { get; protected set; }
         /// <summary>
+        /// The <see cref="EmptyEventProxyEmitter"/> that is executed on the Interactor's grab action.
+        /// </summary>
+        [Serialized]
+        [field: DocumentedByXml, Restricted]
+        public EmptyEventProxyEmitter GrabProxyActions { get; protected set; }
+        /// <summary>
         /// The <see cref="CountdownTimer"/> that controls when the pointer is reactivated.
         /// </summary>
         [Serialized]
@@ -129,6 +137,11 @@
         /// The kinematic state of the <see cref="InteractableFacade.InteractableRigidbody"/> before the transition period.
         /// </summary>
         protected bool cachedKinematicState;
+
+        /// <summary>
+        /// A global static list of <see cref="DistanceGrabberConfigurator"/> for look up.
+        /// </summary>
+        public static List<DistanceGrabberConfigurator> ValidConfigurators = new List<DistanceGrabberConfigurator>();
 
         /// <summary>
         /// Configures the relevant components that require knowledge of the Interactor.
@@ -240,17 +253,78 @@
             Facade.CurrentInteractable.InteractableRigidbody.isKinematic = cachedKinematicState;
         }
 
+        /// <summary>
+        /// Emits the <see cref="Facade.BeforeGrabbed"/> event.
+        /// </summary>
+        /// <param name="interactable">The payload to emit with.</param>
+        public virtual void NotifyBeforeGrabbed(InteractableFacade interactable)
+        {
+            if (interactable == null)
+            {
+                return;
+            }
+
+            foreach (DistanceGrabberConfigurator configurator in ValidConfigurators)
+            {
+                if (!configurator.Equals(this))
+                {
+                    configurator.GrabProxyActions.Receive();
+                }
+            }
+            interactable.Ungrab();
+
+            Facade.BeforeGrabbed?.Invoke(interactable);
+        }
+
+        /// <summary>
+        /// Emits the <see cref="Facade.GrabCanceled"/> event.
+        /// </summary>
+        public virtual void NotifyGrabCanceled()
+        {
+            if (Grabber == null || Grabber.Interactable == null)
+            {
+                return;
+            }
+
+            Facade.GrabCanceled?.Invoke(Grabber.Interactable);
+        }
+
+        /// <summary>
+        /// Emits the <see cref="Facade.AfterGrabbed"/> event.
+        /// </summary>
+        /// <param name="interactable">The payload to emit with.</param>
+        public virtual void NotifyAfterGrabbed(InteractableFacade interactable)
+        {
+            if (interactable == null)
+            {
+                return;
+            }
+
+            Facade.AfterGrabbed?.Invoke(interactable);
+        }
+
         protected virtual void OnEnable()
         {
             ConfigureInteractor();
             ConfigurePropertyApplier();
             ConfigureReactivatePointerTimer();
             ConfigurePointerRules();
+            if (!ValidConfigurators.Contains(this))
+            {
+                ValidConfigurators.Add(this);
+            }
+        }
+
+        protected virtual IEnumerator Start()
+        {
+            yield return new WaitForEndOfFrame();
+            OnEnable();
         }
 
         protected virtual void OnDisable()
         {
             UnregisterInteractorListeners();
+            ValidConfigurators.Remove(this);
         }
 
         /// <summary>
