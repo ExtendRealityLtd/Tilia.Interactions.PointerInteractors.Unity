@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.7.0](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.6.2...v1.7.0) (2021-04-23)
+
+#### Features
+
+* **Facade:** add pre/post/cancel events for grab ([8c3808e](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/8c3808e40e2891ee84fbc8f734e4aa6bad9d1792))
+  > The Facade now has three new events when the pointer grabs an item. It will emit a BeforeGrabbed event when the grab is initiated and a AfterGrabbed when the grab is finished. If the grab is canceled during transition then a GrabCanceled event is emitted.
+  > 
+  > Also fixed an issue with the pointer cursor not looking correct in VR. It now just uses an unlit transparent color shader instead of the screen shader and it uses a mesh instead of billboards so it looks better in the headset. It also uses a normal rotator so the cursor is always flat on the surface it is hitting.
+
 ### [1.6.2](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.6.1...v1.6.2) (2021-04-07)
 
 #### Miscellaneous Chores
