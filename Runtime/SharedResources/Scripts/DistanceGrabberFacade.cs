@@ -4,9 +4,11 @@
     using Malimbe.MemberClearanceMethod;
     using Malimbe.PropertySerializationAttribute;
     using Malimbe.XmlDocumentationAttribute;
+    using System;
     using Tilia.Interactions.Interactables.Interactables;
     using Tilia.Interactions.Interactables.Interactors;
     using UnityEngine;
+    using UnityEngine.Events;
     using Zinnia.Cast;
     using Zinnia.Data.Attribute;
     using Zinnia.Rule;
@@ -16,6 +18,12 @@
     /// </summary>
     public class DistanceGrabberFacade : MonoBehaviour
     {
+        /// <summary>
+        /// Defines the event with the <see cref="InteractableFacade"/>.
+        /// </summary>
+        [Serializable]
+        public class UnityEvent : UnityEvent<InteractableFacade> { }
+
         #region Interaction Settings
         /// <summary>
         /// The <see cref="InteractorFacade"/> to grab to.
@@ -56,6 +64,24 @@
         [Serialized, Cleared]
         [field: DocumentedByXml]
         public PhysicsCast RaycastRules { get; set; }
+        #endregion
+
+        #region Grab Events
+        /// <summary>
+        /// Emitted before the grab occurs.
+        /// </summary>
+        [Header("Grab Events"), DocumentedByXml]
+        public UnityEvent BeforeGrabbed = new UnityEvent();
+        /// <summary>
+        /// Emitted if the grab occurrence is canceled.
+        /// </summary>
+        [DocumentedByXml]
+        public UnityEvent GrabCanceled = new UnityEvent();
+        /// <summary>
+        /// Emitted after the grab occurs.
+        /// </summary>
+        [DocumentedByXml]
+        public UnityEvent AfterGrabbed = new UnityEvent();
         #endregion
 
         #region Reference Settings
