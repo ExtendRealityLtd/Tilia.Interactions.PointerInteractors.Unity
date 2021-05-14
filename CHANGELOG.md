@@ -1,5 +1,16 @@
 # Changelog
 
+### [1.7.8](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.7.7...v1.7.8) (2021-05-14)
+
+#### Miscellaneous Chores
+
+* **deps:** bump io.extendreality.tilia.interactions.interactables.unity ([758506d](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/758506d3b0c787d8e3ec223449fcc2d939afc818))
+  > Bumps [io.extendreality.tilia.interactions.interactables.unity](https://github.com/ExtendRealityLtd/Tilia.Interactions.Interactables.Unity) from 1.18.0 to 1.19.0. - [Release notes](https://github.com/ExtendRealityLtd/Tilia.Interactions.Interactables.Unity/releases) - [Changelog](https://github.com/ExtendRealityLtd/Tilia.Interactions.Interactables.Unity/blob/master/CHANGELOG.md) - [Commits](https://github.com/ExtendRealityLtd/Tilia.Interactions.Interactables.Unity/compare/v1.18.0...v1.19.0)
+  > 
+  > Signed-off-by: dependabot[bot] <support@github.com>
+* **README.md:** update title logo to related-media repo ([94f119b](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/94f119b9950bb769d5cf70f5d13511050c07cbcf))
+  > The title logo is now located on the related-media repo.
+
 ### [1.7.7](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.7.6...v1.7.7) (2021-05-10)
 
 #### Miscellaneous Chores
