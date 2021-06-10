@@ -2,7 +2,7 @@
     "name": "io.extendreality.tilia.interactions.pointerinteractors.unity",
     "displayName": "Tilia Interactions PointerInteractors Unity",
     "description": "Utilize ObjectPointers to initiate an Interactor grab on an Interactable for the Unity software.",
-    "version": "1.7.13",
+    "version": "1.7.14",
     "unity": "2018.3",
     "unityRelease": "10f1",
     "keywords": [
