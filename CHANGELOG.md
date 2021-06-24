@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.8.0](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.7.22...v1.8.0) (2021-06-24)
+
+#### Features
+
+* **prefab:** simulate interactable touch with pointer ([674250c](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/674250cf0ee1b2094d83721d1a2c71823580930f))
+  > The distance grabber pointer will now simulate a touch event when the pointer hovers over an interactable and will therefore trigger the touch events on the interactable.
+
+#### Bug Fixes
+
+* **prefab:** remove race condition on clear of grabbing interactable ([2d8323b](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/2d8323bffc2b3f9702459e0c8b27899a6db62848))
+  > There was a race condition where the grabbing interactable was getting cleared before the grab took place, this was more prominent if the grab precognition on the interactor was higher. This has been fixed by putting the clear logic after a end of frame yield emitter so it ensures everything is done before the clear is executed.
+
 ### [1.7.22](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.7.21...v1.7.22) (2021-06-24)
 
 #### Miscellaneous Chores
