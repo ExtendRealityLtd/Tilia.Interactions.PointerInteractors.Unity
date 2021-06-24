@@ -7,6 +7,7 @@
     using Tilia.Indicators.ObjectPointers;
     using Tilia.Interactions.Interactables.Interactables;
     using Tilia.Interactions.Interactables.Interactables.Grab.Action;
+    using Tilia.Interactions.Interactables.Interactors;
     using UnityEngine;
     using Zinnia.Action;
     using Zinnia.Data.Attribute;
@@ -118,6 +119,12 @@
         [Serialized]
         [field: DocumentedByXml, Restricted]
         public RuleContainerObservableList TargetValidityRules { get; protected set; }
+        /// <summary>
+        /// An <see cref="InteractorFacade"/> that is used to simulate touch events with the pointer.
+        /// </summary>
+        [Serialized]
+        [field: DocumentedByXml, Restricted]
+        public InteractorFacade SimulatedInteractor { get; protected set; }
         #endregion
 
         /// <summary>
@@ -137,6 +144,10 @@
         /// The kinematic state of the <see cref="InteractableFacade.InteractableRigidbody"/> before the transition period.
         /// </summary>
         protected bool cachedKinematicState;
+        /// <summary>
+        /// The current grab precognition value for the associated Interactor.
+        /// </summary>
+        protected float cachedInteractorPrecognitionValue;
 
         /// <summary>
         /// A global static list of <see cref="DistanceGrabberConfigurator"/> for look up.
@@ -163,7 +174,7 @@
         /// </summary>
         public virtual void ConfigurePropertyApplier()
         {
-            PropertyApplier.TransitionDuration = Facade.TransitionDuration;
+            PropertyApplier.TransitionDuration = Facade.TransitionDuration.ApproxEquals(0f) ? 0.0001f : Facade.TransitionDuration;
         }
 
         /// <summary>
@@ -245,12 +256,13 @@
         /// </summary>
         public virtual void RestoreCachedInteractableKinematicState()
         {
-            if (Facade.CurrentInteractable == null || !ForceKinematicOnTransition)
+            if (Facade == null || Facade.CurrentInteractable == null || !ForceKinematicOnTransition)
             {
                 return;
             }
 
             Facade.CurrentInteractable.InteractableRigidbody.isKinematic = cachedKinematicState;
+            cachedKinematicState = Facade.CurrentInteractable.InteractableRigidbody.isKinematic;
         }
 
         /// <summary>
@@ -264,6 +276,8 @@
                 return;
             }
 
+            cachedInteractorPrecognitionValue = Facade.Interactor.GrabPrecognition;
+            Facade.Interactor.GrabPrecognition = 0f;
             foreach (DistanceGrabberConfigurator configurator in ValidConfigurators)
             {
                 if (!configurator.Equals(this))
@@ -286,6 +300,7 @@
                 return;
             }
 
+            RestoreInteractorPrecognitionValue();
             Facade.GrabCanceled?.Invoke(Grabber.Interactable);
         }
 
@@ -300,7 +315,36 @@
                 return;
             }
 
+            RestoreInteractorPrecognitionValue();
             Facade.AfterGrabbed?.Invoke(interactable);
+        }
+
+        /// <summary>
+        /// Simulates a touch on the given Interactable.
+        /// </summary>
+        /// <param name="interactable">The Interactable to simulate the touch on.</param>
+        public virtual void SimulateTouch(InteractableFacade interactable)
+        {
+            if (interactable == null)
+            {
+                return;
+            }
+
+            interactable.Configuration.TouchConfiguration.NotifyTouch(SimulatedInteractor.gameObject);
+        }
+
+        /// <summary>
+        /// Simulates an untouch on the given Interactable.
+        /// </summary>
+        /// <param name="interactable">The Interactable to simulate the untouch on.</param>
+        public virtual void SimulateUntouch(InteractableFacade interactable)
+        {
+            if (interactable == null)
+            {
+                return;
+            }
+
+            interactable.Configuration.TouchConfiguration.NotifyUntouch(SimulatedInteractor.gameObject);
         }
 
         protected virtual void OnEnable()
@@ -323,8 +367,25 @@
 
         protected virtual void OnDisable()
         {
+            RestoreInteractorPrecognitionValue();
+            RestoreCachedInteractableKinematicState();
+
             UnregisterInteractorListeners();
             ValidConfigurators.Remove(this);
+        }
+
+        /// <summary>
+        /// Restores the cached Interactor precognition value.
+        /// </summary>
+        protected virtual void RestoreInteractorPrecognitionValue()
+        {
+            if (Facade == null || Facade.Interactor == null)
+            {
+                return;
+            }
+
+            Facade.Interactor.GrabPrecognition = cachedInteractorPrecognitionValue;
+            cachedInteractorPrecognitionValue = Facade.Interactor.GrabPrecognition;
         }
 
         /// <summary>

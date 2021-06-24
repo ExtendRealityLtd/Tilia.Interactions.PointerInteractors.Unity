@@ -5,6 +5,7 @@
     using Malimbe.PropertySerializationAttribute;
     using Malimbe.XmlDocumentationAttribute;
     using System;
+    using System.Collections;
     using Tilia.Interactions.Interactables.Interactables;
     using Tilia.Interactions.Interactables.Interactors;
     using UnityEngine;
@@ -41,6 +42,15 @@
         public UnityEvent Grabbed = new UnityEvent();
 
         /// <summary>
+        /// A reusable instance of <see cref="WaitForEndOfFrame"/>.
+        /// </summary>
+        protected static readonly WaitForEndOfFrame DelayInstruction = new WaitForEndOfFrame();
+        /// <summary>
+        /// The routine for managing the grab.
+        /// </summary>
+        protected Coroutine grabRoutine;
+
+        /// <summary>
         /// Attempts to grab the <see cref="Interactable"/> to the <see cref="Interactor"/>.
         /// </summary>
         [RequiresBehaviourState]
@@ -51,10 +61,50 @@
                 return;
             }
 
-            Interactable.Ungrab();
+            if (Interactable.IsGrabbed)
+            {
+                Interactable.Ungrab();
+            }
 
-            Interactor.Grab(Interactable);
-            Grabbed?.Invoke(Interactable);
+            CancelGrabRoutine();
+            grabRoutine = StartCoroutine(GrabAtEndOfFrame());
+        }
+
+        protected virtual void OnDisable()
+        {
+            CancelGrabRoutine();
+        }
+
+        /// <summary>
+        /// Performs the grab at the end of the current frame.
+        /// </summary>
+        /// <returns>Coroutine enumerator.</returns>
+        protected virtual IEnumerator GrabAtEndOfFrame()
+        {
+            yield return DelayInstruction;
+
+            if (Interactor.GrabConfiguration.GrabAction.Value)
+            {
+                bool cachedSetting = Interactor.GrabConfiguration.TouchBeforeForceGrab;
+                Interactor.GrabConfiguration.TouchBeforeForceGrab = false;
+                Interactor.Grab(Interactable);
+                Interactor.GrabConfiguration.TouchBeforeForceGrab = cachedSetting;
+                Grabbed?.Invoke(Interactable);
+            }
+        }
+
+        /// <summary>
+        /// Cancels the existing running grab coroutine.
+        /// </summary>
+        protected virtual void CancelGrabRoutine()
+        {
+            if (grabRoutine == null)
+            {
+                return;
+            }
+
+            StopCoroutine(grabRoutine);
+            grabRoutine = null;
         }
     }
 }
