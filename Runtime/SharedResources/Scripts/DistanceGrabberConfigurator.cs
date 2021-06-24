@@ -7,6 +7,7 @@
     using Tilia.Indicators.ObjectPointers;
     using Tilia.Interactions.Interactables.Interactables;
     using Tilia.Interactions.Interactables.Interactables.Grab.Action;
+    using Tilia.Interactions.Interactables.Interactors;
     using UnityEngine;
     using Zinnia.Action;
     using Zinnia.Data.Attribute;
@@ -118,6 +119,12 @@
         [Serialized]
         [field: DocumentedByXml, Restricted]
         public RuleContainerObservableList TargetValidityRules { get; protected set; }
+        /// <summary>
+        /// An <see cref="InteractorFacade"/> that is used to simulate touch events with the pointer.
+        /// </summary>
+        [Serialized]
+        [field: DocumentedByXml, Restricted]
+        public InteractorFacade SimulatedInteractor { get; protected set; }
         #endregion
 
         /// <summary>
@@ -310,6 +317,34 @@
 
             RestoreInteractorPrecognitionValue();
             Facade.AfterGrabbed?.Invoke(interactable);
+        }
+
+        /// <summary>
+        /// Simulates a touch on the given Interactable.
+        /// </summary>
+        /// <param name="interactable">The Interactable to simulate the touch on.</param>
+        public virtual void SimulateTouch(InteractableFacade interactable)
+        {
+            if (interactable == null)
+            {
+                return;
+            }
+
+            interactable.Configuration.TouchConfiguration.NotifyTouch(SimulatedInteractor.gameObject);
+        }
+
+        /// <summary>
+        /// Simulates an untouch on the given Interactable.
+        /// </summary>
+        /// <param name="interactable">The Interactable to simulate the untouch on.</param>
+        public virtual void SimulateUntouch(InteractableFacade interactable)
+        {
+            if (interactable == null)
+            {
+                return;
+            }
+
+            interactable.Configuration.TouchConfiguration.NotifyUntouch(SimulatedInteractor.gameObject);
         }
 
         protected virtual void OnEnable()

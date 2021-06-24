@@ -7,6 +7,10 @@ The public interface into the DistanceGrabber Prefab.
 * [Inheritance]
 * [Namespace]
 * [Syntax]
+* [Fields]
+  * [AfterGrabbed]
+  * [BeforeGrabbed]
+  * [GrabCanceled]
 * [Properties]
   * [Configuration]
   * [CurrentInteractable]
@@ -39,6 +43,38 @@ The public interface into the DistanceGrabber Prefab.
 
 ```
 public class DistanceGrabberFacade : MonoBehaviour
+```
+
+### Fields
+
+#### AfterGrabbed
+
+Emitted after the grab occurs.
+
+##### Declaration
+
+```
+public DistanceGrabberFacade.UnityEvent AfterGrabbed
+```
+
+#### BeforeGrabbed
+
+Emitted before the grab occurs.
+
+##### Declaration
+
+```
+public DistanceGrabberFacade.UnityEvent BeforeGrabbed
+```
+
+#### GrabCanceled
+
+Emitted if the grab occurrence is canceled.
+
+##### Declaration
+
+```
+public DistanceGrabberFacade.UnityEvent GrabCanceled
 ```
 
 ### Properties
@@ -186,6 +222,7 @@ protected virtual void OnAfterTransitionDurationChange()
 ```
 
 [Tilia.Interactions.PointerInteractors]: README.md
+[DistanceGrabberFacade.UnityEvent]: DistanceGrabberFacade.UnityEvent.md
 [DistanceGrabberConfigurator]: DistanceGrabberConfigurator.md
 [Interactor]: DistanceGrabberFacade.md#Interactor
 [UngrabDelay]: DistanceGrabberFacade.md#UngrabDelay
@@ -197,6 +234,10 @@ protected virtual void OnAfterTransitionDurationChange()
 [Inheritance]: #Inheritance
 [Namespace]: #Namespace
 [Syntax]: #Syntax
+[Fields]: #Fields
+[AfterGrabbed]: #AfterGrabbed
+[BeforeGrabbed]: #BeforeGrabbed
+[GrabCanceled]: #GrabCanceled
 [Properties]: #Properties
 [Configuration]: #Configuration
 [CurrentInteractable]: #CurrentInteractable

@@ -8,9 +8,11 @@ Sets up the DistanceGrabber Prefab based on the provided user settings.
 * [Namespace]
 * [Syntax]
 * [Fields]
+  * [cachedInteractorPrecognitionValue]
   * [cachedKinematicState]
   * [grabPoint]
   * [hasSubscribedToInteractorEvents]
+  * [ValidConfigurators]
 * [Properties]
   * [AlwaysCreateGrabPoint]
   * [DisablePointerOnInteractorTouch]
@@ -20,11 +22,13 @@ Sets up the DistanceGrabber Prefab based on the provided user settings.
   * [Grabber]
   * [GrabListener]
   * [GrabProxy]
+  * [GrabProxyActions]
   * [Pointer]
   * [PointerContainer]
   * [PropertyApplier]
   * [ReactivatePointerTimer]
   * [ShouldIgnoreEnablePointer]
+  * [SimulatedInteractor]
   * [TargetValidityRules]
   * [UngrabListener]
 * [Methods]
@@ -38,12 +42,19 @@ Sets up the DistanceGrabber Prefab based on the provided user settings.
   * [HasTouched(InteractableFacade)]
   * [HasUntouched(InteractableFacade)]
   * [MakeInteractableKinematic()]
+  * [NotifyAfterGrabbed(InteractableFacade)]
+  * [NotifyBeforeGrabbed(InteractableFacade)]
+  * [NotifyGrabCanceled()]
   * [OnDisable()]
   * [OnEnable()]
   * [PerformGrab(InteractableFacade)]
   * [PerformUngrab(InteractableFacade)]
   * [RegisterInteractorListeners()]
   * [RestoreCachedInteractableKinematicState()]
+  * [RestoreInteractorPrecognitionValue()]
+  * [SimulateTouch(InteractableFacade)]
+  * [SimulateUntouch(InteractableFacade)]
+  * [Start()]
   * [UnregisterInteractorListeners()]
 
 ## Details
@@ -64,6 +75,16 @@ public class DistanceGrabberConfigurator : MonoBehaviour
 ```
 
 ### Fields
+
+#### cachedInteractorPrecognitionValue
+
+The current grab precognition value for the associated Interactor.
+
+##### Declaration
+
+```
+protected float cachedInteractorPrecognitionValue
+```
 
 #### cachedKinematicState
 
@@ -93,6 +114,16 @@ Whether the Interactor events have been subscribed to.
 
 ```
 protected bool hasSubscribedToInteractorEvents
+```
+
+#### ValidConfigurators
+
+A global static list of [DistanceGrabberConfigurator] for look up.
+
+##### Declaration
+
+```
+public static List<DistanceGrabberConfigurator> ValidConfigurators
 ```
 
 ### Properties
@@ -177,6 +208,16 @@ The BooleanAction that proxies the Interactor's grab action.
 public BooleanAction GrabProxy { get; protected set; }
 ```
 
+#### GrabProxyActions
+
+The EmptyEventProxyEmitter that is executed on the Interactor's grab action.
+
+##### Declaration
+
+```
+public EmptyEventProxyEmitter GrabProxyActions { get; protected set; }
+```
+
 #### Pointer
 
 The PointerFacade to initiate the grabbing.
@@ -225,6 +266,16 @@ Whether to ignore the re-enabling of the pointer logic when the Facade.Interacto
 
 ```
 public bool ShouldIgnoreEnablePointer { get; set; }
+```
+
+#### SimulatedInteractor
+
+An InteractorFacade that is used to simulate touch events with the pointer.
+
+##### Declaration
+
+```
+public InteractorFacade SimulatedInteractor { get; protected set; }
 ```
 
 #### TargetValidityRules
@@ -379,6 +430,48 @@ Makes the InteractableFacade.InteractableRigidbody kinematic.
 public virtual void MakeInteractableKinematic()
 ```
 
+#### NotifyAfterGrabbed(InteractableFacade)
+
+Emits the Facade.AfterGrabbed event.
+
+##### Declaration
+
+```
+public virtual void NotifyAfterGrabbed(InteractableFacade interactable)
+```
+
+##### Parameters
+
+| Type | Name | Description |
+| --- | --- | --- |
+| InteractableFacade | interactable | The payload to emit with. |
+
+#### NotifyBeforeGrabbed(InteractableFacade)
+
+Emits the Facade.BeforeGrabbed event.
+
+##### Declaration
+
+```
+public virtual void NotifyBeforeGrabbed(InteractableFacade interactable)
+```
+
+##### Parameters
+
+| Type | Name | Description |
+| --- | --- | --- |
+| InteractableFacade | interactable | The payload to emit with. |
+
+#### NotifyGrabCanceled()
+
+Emits the Facade.GrabCanceled event.
+
+##### Declaration
+
+```
+public virtual void NotifyGrabCanceled()
+```
+
 #### OnDisable()
 
 ##### Declaration
@@ -447,6 +540,62 @@ Restores the InteractableFacade.InteractableRigidbody kinematic state to the val
 public virtual void RestoreCachedInteractableKinematicState()
 ```
 
+#### RestoreInteractorPrecognitionValue()
+
+Restores the cached Interactor precognition value.
+
+##### Declaration
+
+```
+protected virtual void RestoreInteractorPrecognitionValue()
+```
+
+#### SimulateTouch(InteractableFacade)
+
+Simulates a touch on the given Interactable.
+
+##### Declaration
+
+```
+public virtual void SimulateTouch(InteractableFacade interactable)
+```
+
+##### Parameters
+
+| Type | Name | Description |
+| --- | --- | --- |
+| InteractableFacade | interactable | The Interactable to simulate the touch on. |
+
+#### SimulateUntouch(InteractableFacade)
+
+Simulates an untouch on the given Interactable.
+
+##### Declaration
+
+```
+public virtual void SimulateUntouch(InteractableFacade interactable)
+```
+
+##### Parameters
+
+| Type | Name | Description |
+| --- | --- | --- |
+| InteractableFacade | interactable | The Interactable to simulate the untouch on. |
+
+#### Start()
+
+##### Declaration
+
+```
+protected virtual IEnumerator Start()
+```
+
+##### Returns
+
+| Type | Description |
+| --- | --- |
+| System.Collections.IEnumerator | n/a |
+
 #### UnregisterInteractorListeners()
 
 Unregisters the Interactor listeners.
@@ -458,6 +607,7 @@ protected virtual void UnregisterInteractorListeners()
 ```
 
 [Tilia.Interactions.PointerInteractors]: README.md
+[DistanceGrabberConfigurator]: DistanceGrabberConfigurator.md
 [DistanceGrabberFacade]: DistanceGrabberFacade.md
 [InteractableGrabber]: InteractableGrabber.md
 [cachedKinematicState]: DistanceGrabberConfigurator.md#cachedKinematicState
@@ -465,9 +615,11 @@ protected virtual void UnregisterInteractorListeners()
 [Namespace]: #Namespace
 [Syntax]: #Syntax
 [Fields]: #Fields
+[cachedInteractorPrecognitionValue]: #cachedInteractorPrecognitionValue
 [cachedKinematicState]: #cachedKinematicState
 [grabPoint]: #grabPoint
 [hasSubscribedToInteractorEvents]: #hasSubscribedToInteractorEvents
+[ValidConfigurators]: #ValidConfigurators
 [Properties]: #Properties
 [AlwaysCreateGrabPoint]: #AlwaysCreateGrabPoint
 [DisablePointerOnInteractorTouch]: #DisablePointerOnInteractorTouch
@@ -477,11 +629,13 @@ protected virtual void UnregisterInteractorListeners()
 [Grabber]: #Grabber
 [GrabListener]: #GrabListener
 [GrabProxy]: #GrabProxy
+[GrabProxyActions]: #GrabProxyActions
 [Pointer]: #Pointer
 [PointerContainer]: #PointerContainer
 [PropertyApplier]: #PropertyApplier
 [ReactivatePointerTimer]: #ReactivatePointerTimer
 [ShouldIgnoreEnablePointer]: #ShouldIgnoreEnablePointer
+[SimulatedInteractor]: #SimulatedInteractor
 [TargetValidityRules]: #TargetValidityRules
 [UngrabListener]: #UngrabListener
 [Methods]: #Methods
@@ -495,10 +649,17 @@ protected virtual void UnregisterInteractorListeners()
 [HasTouched(InteractableFacade)]: #HasTouchedInteractableFacade
 [HasUntouched(InteractableFacade)]: #HasUntouchedInteractableFacade
 [MakeInteractableKinematic()]: #MakeInteractableKinematic
+[NotifyAfterGrabbed(InteractableFacade)]: #NotifyAfterGrabbedInteractableFacade
+[NotifyBeforeGrabbed(InteractableFacade)]: #NotifyBeforeGrabbedInteractableFacade
+[NotifyGrabCanceled()]: #NotifyGrabCanceled
 [OnDisable()]: #OnDisable
 [OnEnable()]: #OnEnable
 [PerformGrab(InteractableFacade)]: #PerformGrabInteractableFacade
 [PerformUngrab(InteractableFacade)]: #PerformUngrabInteractableFacade
 [RegisterInteractorListeners()]: #RegisterInteractorListeners
 [RestoreCachedInteractableKinematicState()]: #RestoreCachedInteractableKinematicState
+[RestoreInteractorPrecognitionValue()]: #RestoreInteractorPrecognitionValue
+[SimulateTouch(InteractableFacade)]: #SimulateTouchInteractableFacade
+[SimulateUntouch(InteractableFacade)]: #SimulateUntouchInteractableFacade
+[Start()]: #Start
 [UnregisterInteractorListeners()]: #UnregisterInteractorListeners

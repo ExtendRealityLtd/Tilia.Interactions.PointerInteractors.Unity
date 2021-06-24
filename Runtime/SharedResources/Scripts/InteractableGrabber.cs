@@ -85,7 +85,10 @@
 
             if (Interactor.GrabConfiguration.GrabAction.Value)
             {
+                bool cachedSetting = Interactor.GrabConfiguration.TouchBeforeForceGrab;
+                Interactor.GrabConfiguration.TouchBeforeForceGrab = false;
                 Interactor.Grab(Interactable);
+                Interactor.GrabConfiguration.TouchBeforeForceGrab = cachedSetting;
                 Grabbed?.Invoke(Interactable);
             }
         }
