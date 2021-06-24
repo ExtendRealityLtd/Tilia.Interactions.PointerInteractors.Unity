@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.8.1](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.8.0...v1.8.1) (2021-06-24)
+
+#### Bug Fixes
+
+* **prefab:** add pseudo grab components for simulated touch ([1dd0ccf](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/1dd0ccf26cf9ec223a2719961482aba837f85f06))
+  > There are occasions where the barebones grab configuration is required and will give errors if it is not available. This fix adds a barebones grab configuration to remove such errors.
+
 ## [1.8.0](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.7.22...v1.8.0) (2021-06-24)
 
 #### Features
