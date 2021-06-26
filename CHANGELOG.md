@@ -1,5 +1,14 @@
 # Changelog
 
+### [1.8.2](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.8.1...v1.8.2) (2021-06-26)
+
+#### Bug Fixes
+
+* **prefab:** prevent race condition when pointer is disabled on grab ([7e9730d](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/7e9730d7ad3dd432e40c5ff44a87e37bd43ca5c6))
+  > There was an issue with a race condition causing the grab action on the pointer to not work because the pointer was being disabled on grab.
+  > 
+  > This has been fixed by disabling after the end of the frame.
+
 ### [1.8.1](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.8.0...v1.8.1) (2021-06-24)
 
 #### Bug Fixes
