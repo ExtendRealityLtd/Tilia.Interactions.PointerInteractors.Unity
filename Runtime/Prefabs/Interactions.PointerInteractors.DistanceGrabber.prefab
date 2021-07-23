@@ -1079,7 +1079,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7533518593231451648}
   - component: {fileID: 5499414486435190371}
-  - component: {fileID: 7533518593231451663}
+  - component: {fileID: 1296783321114307391}
   m_Layer: 0
   m_Name: GrabToInteractor
   m_TagString: Untagged
@@ -1127,7 +1127,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 7533518593231451663}
+      - m_Target: {fileID: 1296783321114307391}
         m_MethodName: DoGrab
         m_Mode: 1
         m_Arguments:
@@ -1141,7 +1141,7 @@ MonoBehaviour:
   Cancelled:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7533518593231451663
+--- !u!114 &1296783321114307391
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1150,7 +1150,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7533518593231451649}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eff39a129cb7cc14bbb7cf26df8028eb, type: 3}
+  m_Script: {fileID: 11500000, guid: 21307543b9b27cb48a55ad9bb34438a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactor: {fileID: 0}
@@ -1343,7 +1343,7 @@ MonoBehaviour:
   disablePointerOnInteractorTouch: 1
   pointerContainer: {fileID: 7533518593574485166}
   pointer: {fileID: 5668053291574616488}
-  grabber: {fileID: 7533518593231451663}
+  grabber: {fileID: 1296783321114307391}
   propertyApplier: {fileID: 7533518594347027304}
   grabListener: {fileID: 7533518595083042311}
   ungrabListener: {fileID: 7533518593124272223}
@@ -6656,7 +6656,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 7533518593231451663}
+      - m_Target: {fileID: 1296783321114307391}
         m_MethodName: set_Interactable
         m_Mode: 0
         m_Arguments:
@@ -6770,7 +6770,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 7533518593231451663}
+      - m_Target: {fileID: 1296783321114307391}
         m_MethodName: ClearInteractable
         m_Mode: 1
         m_Arguments:
