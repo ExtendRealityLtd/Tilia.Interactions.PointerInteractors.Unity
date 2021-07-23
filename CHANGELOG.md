@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.9.0](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.8.10...v1.9.0) (2021-07-23)
+
+#### Features
+
+* **prefab:** replace interactable grabber with base component ([55e5601](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/55e560178186214bf8181c1eb833e332b31c0b6a))
+  > The InteractableGrabber component now exists in the Interactables package so this version is now being used as there is already a dependency on this package anyway.
+  > 
+  > The InteractableGrabber has been deleted from this package now to prevent any clashes. This is technically a breaking change for anyone who would be using this component.
+
 ### [1.8.10](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.8.9...v1.8.10) (2021-07-23)
 
 #### Miscellaneous Chores
