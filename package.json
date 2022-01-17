@@ -31,7 +31,7 @@
         "io.extendreality.zinnia.unity": "1.44.0",
         "io.extendreality.tilia.utilities.shaders.unity": "1.2.0",
         "io.extendreality.tilia.indicators.objectpointers.unity": "1.7.26",
-        "io.extendreality.tilia.interactions.interactables.unity": "1.22.5"
+        "io.extendreality.tilia.interactions.interactables.unity": "1.22.6"
     },
     "files": [
         "*.md",
