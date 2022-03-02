@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.0](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.9.26...v1.10.0) (2022-03-02)
+
+#### Features
+
+* **package.json:** add information urls to package ([9c83e4d](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/9c83e4d6437009eaf002c7fec1574921a98e4765))
+  > The changelog, documentation and license url has been added to the package.json as these are used within the Unity package manager.
+
 ### [1.9.26](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.9.25...v1.9.26) (2022-02-14)
 
 #### Miscellaneous Chores
