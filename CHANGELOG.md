@@ -1,5 +1,14 @@
 # Changelog
 
+### [1.10.1](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.10.0...v1.10.1) (2022-03-02)
+
+#### Miscellaneous Chores
+
+* **deps:** bump io.extendreality.tilia.interactions.interactables.unity ([ce775d3](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/ce775d353d52b4cbf3ff7906f38689f42870ddc7))
+  > Bumps [io.extendreality.tilia.interactions.interactables.unity](https://github.com/ExtendRealityLtd/Tilia.Interactions.Interactables.Unity) from 1.22.9 to 1.23.0. - [Release notes](https://github.com/ExtendRealityLtd/Tilia.Interactions.Interactables.Unity/releases) - [Changelog](https://github.com/ExtendRealityLtd/Tilia.Interactions.Interactables.Unity/blob/master/CHANGELOG.md) - [Commits](https://github.com/ExtendRealityLtd/Tilia.Interactions.Interactables.Unity/compare/v1.22.9...v1.23.0)
+* **deps:** bump io.extendreality.tilia.utilities.shaders.unity ([d4da158](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/d4da158c0b8b8ad488dedfaad882def44ad7c3f3))
+  > Bumps [io.extendreality.tilia.utilities.shaders.unity](https://github.com/ExtendRealityLtd/Tilia.Utilities.Shaders.Unity) from 1.2.0 to 1.3.0. - [Release notes](https://github.com/ExtendRealityLtd/Tilia.Utilities.Shaders.Unity/releases) - [Changelog](https://github.com/ExtendRealityLtd/Tilia.Utilities.Shaders.Unity/blob/master/CHANGELOG.md) - [Commits](https://github.com/ExtendRealityLtd/Tilia.Utilities.Shaders.Unity/compare/v1.2.0...v1.3.0)
+
 ## [1.10.0](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.9.26...v1.10.0) (2022-03-02)
 
 #### Features
