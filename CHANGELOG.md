@@ -1,5 +1,14 @@
 # Changelog
 
+### [1.10.5](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.10.4...v1.10.5) (2022-03-15)
+
+#### Miscellaneous Chores
+
+* **dependabot:** remove bddckr from reviewers ([2fe15bd](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/2fe15bd20179118878c1295da4d143d919918f2c))
+  > Chris hasn't been actively part of the project for a while.
+* **deps:** bump io.extendreality.tilia.interactions.interactables.unity ([7fa0eb4](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/7fa0eb4027edc248ae51beabee425fcb0dfa1232))
+  > Bumps [io.extendreality.tilia.interactions.interactables.unity](https://github.com/ExtendRealityLtd/Tilia.Interactions.Interactables.Unity) from 1.24.0 to 1.24.1. - [Release notes](https://github.com/ExtendRealityLtd/Tilia.Interactions.Interactables.Unity/releases) - [Changelog](https://github.com/ExtendRealityLtd/Tilia.Interactions.Interactables.Unity/blob/master/CHANGELOG.md) - [Commits](https://github.com/ExtendRealityLtd/Tilia.Interactions.Interactables.Unity/compare/v1.24.0...v1.24.1)
+
 ### [1.10.4](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.10.3...v1.10.4) (2022-03-15)
 
 #### Miscellaneous Chores
