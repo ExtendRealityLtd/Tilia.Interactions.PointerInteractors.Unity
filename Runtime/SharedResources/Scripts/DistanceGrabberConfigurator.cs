@@ -1,7 +1,5 @@
 ﻿namespace Tilia.Interactions.PointerInteractors
 {
-    using Malimbe.PropertySerializationAttribute;
-    using Malimbe.XmlDocumentationAttribute;
     using System.Collections;
     using System.Collections.Generic;
     using Tilia.Indicators.ObjectPointers;
@@ -23,108 +21,300 @@
     public class DistanceGrabberConfigurator : MonoBehaviour
     {
         #region Facade Settings
+        [Header("Facade Settings")]
+        [Tooltip("The public facade.")]
+        [SerializeField]
+        [Restricted]
+        private DistanceGrabberFacade facade;
         /// <summary>
         /// The public facade.
         /// </summary>
-        [Serialized]
-        [field: Header("Facade Settings"), DocumentedByXml, Restricted]
-        public DistanceGrabberFacade Facade { get; protected set; }
+        public DistanceGrabberFacade Facade
+        {
+            get
+            {
+                return facade;
+            }
+            protected set
+            {
+                facade = value;
+            }
+        }
         #endregion
 
         #region Functionality Settings
+        [Header("Functionality Settings")]
+        [Tooltip("Determines whether the grab point will be created always or only if the InteractableFacade has a follow action that is set to GrabInteractableFollowAction.OffsetType.PrecisionPoint.")]
+        [SerializeField]
+        private bool alwaysCreateGrabPoint;
         /// <summary>
         /// Determines whether the grab point will be created always or only if the <see cref="InteractableFacade"/> has a follow action that is set to <see cref="GrabInteractableFollowAction.OffsetType.PrecisionPoint"/>.
         /// </summary>
-        [Serialized]
-        [field: Header("Functionality Settings"), DocumentedByXml]
-        public bool AlwaysCreateGrabPoint { get; set; }
+        public bool AlwaysCreateGrabPoint
+        {
+            get
+            {
+                return alwaysCreateGrabPoint;
+            }
+            set
+            {
+                alwaysCreateGrabPoint = value;
+            }
+        }
+        [Tooltip("Forces the InteractableFacade.InteractableRigidbody to be kinematic during the transition.")]
+        [SerializeField]
+        private bool forceKinematicOnTransition = true;
         /// <summary>
         /// Forces the <see cref="InteractableFacade.InteractableRigidbody"/> to be kinematic during the transition.
         /// </summary>
-        [Serialized]
-        [field: DocumentedByXml]
-        public bool ForceKinematicOnTransition { get; set; } = true;
+        public bool ForceKinematicOnTransition
+        {
+            get
+            {
+                return forceKinematicOnTransition;
+            }
+            set
+            {
+                forceKinematicOnTransition = value;
+            }
+        }
+        [Tooltip("Whether to disable the pointer logic when the Facade.Interactor touches the InteractableFacade.")]
+        [SerializeField]
+        private bool disablePointerOnInteractorTouch = true;
         /// <summary>
         /// Whether to disable the pointer logic when the <see cref="Facade.Interactor"/> touches the <see cref="InteractableFacade"/>.
         /// </summary>
-        [Serialized]
-        [field: DocumentedByXml]
-        public bool DisablePointerOnInteractorTouch { get; set; } = true;
+        public bool DisablePointerOnInteractorTouch
+        {
+            get
+            {
+                return disablePointerOnInteractorTouch;
+            }
+            set
+            {
+                disablePointerOnInteractorTouch = value;
+            }
+        }
         #endregion
 
         #region Reference Settings
+        [Header("Reference Settings")]
+        [Tooltip("The containing GameObject of the pointer logic.")]
+        [SerializeField]
+        [Restricted]
+        private GameObject pointerContainer;
         /// <summary>
         /// The containing <see cref="GameObject"/> of the pointer logic.
         /// </summary>
-        [Serialized]
-        [field: Header("Reference Settings"), DocumentedByXml, Restricted]
-        public GameObject PointerContainer { get; protected set; }
+        public GameObject PointerContainer
+        {
+            get
+            {
+                return pointerContainer;
+            }
+            protected set
+            {
+                pointerContainer = value;
+            }
+        }
+        [Tooltip("The PointerFacade to initiate the grabbing.")]
+        [SerializeField]
+        [Restricted]
+        private PointerFacade pointer;
         /// <summary>
         /// The <see cref="PointerFacade"/> to initiate the grabbing.
         /// </summary>
-        [Serialized]
-        [field: DocumentedByXml, Restricted]
-        public PointerFacade Pointer { get; protected set; }
+        public PointerFacade Pointer
+        {
+            get
+            {
+                return pointer;
+            }
+            protected set
+            {
+                pointer = value;
+            }
+        }
+        [Tooltip("The InteractableGrabber that initiates the grabbing.")]
+        [SerializeField]
+        [Restricted]
+        private InteractableGrabber grabber;
         /// <summary>
         /// The <see cref="InteractableGrabber"/> that initiates the grabbing.
         /// </summary>
-        [Serialized]
-        [field: DocumentedByXml, Restricted]
-        public InteractableGrabber Grabber { get; protected set; }
+        public InteractableGrabber Grabber
+        {
+            get
+            {
+                return grabber;
+            }
+            protected set
+            {
+                grabber = value;
+            }
+        }
+        [Tooltip("The TransformPropertyApplier that transitions the Interactable to the Interactor.")]
+        [SerializeField]
+        [Restricted]
+        private TransformPropertyApplier propertyApplier;
         /// <summary>
         /// The <see cref="TransformPropertyApplier"/> that transitions the Interactable to the Interactor.
         /// </summary>
-        [Serialized]
-        [field: DocumentedByXml, Restricted]
-        public TransformPropertyApplier PropertyApplier { get; protected set; }
+        public TransformPropertyApplier PropertyApplier
+        {
+            get
+            {
+                return propertyApplier;
+            }
+            protected set
+            {
+                propertyApplier = value;
+            }
+        }
+        [Tooltip("The EmptyEventProxyEmitter that runs the grab logic.")]
+        [SerializeField]
+        [Restricted]
+        private EmptyEventProxyEmitter grabListener;
         /// <summary>
         /// The <see cref="EmptyEventProxyEmitter"/> that runs the grab logic.
         /// </summary>
-        [Serialized]
-        [field: DocumentedByXml, Restricted]
-        public EmptyEventProxyEmitter GrabListener { get; protected set; }
+        public EmptyEventProxyEmitter GrabListener
+        {
+            get
+            {
+                return grabListener;
+            }
+            protected set
+            {
+                grabListener = value;
+            }
+        }
+        [Tooltip("The EmptyEventProxyEmitter that runs the ungrab logic.")]
+        [SerializeField]
+        [Restricted]
+        private EmptyEventProxyEmitter ungrabListener;
         /// <summary>
         /// The <see cref="EmptyEventProxyEmitter"/> that runs the ungrab logic.
         /// </summary>
-        [Serialized]
-        [field: DocumentedByXml, Restricted]
-        public EmptyEventProxyEmitter UngrabListener { get; protected set; }
+        public EmptyEventProxyEmitter UngrabListener
+        {
+            get
+            {
+                return ungrabListener;
+            }
+            protected set
+            {
+                ungrabListener = value;
+            }
+        }
+        [Tooltip("The BooleanAction that proxies the Interactor's grab action.")]
+        [SerializeField]
+        [Restricted]
+        private BooleanAction grabProxy;
         /// <summary>
         /// The <see cref="BooleanAction"/> that proxies the Interactor's grab action.
         /// </summary>
-        [Serialized]
-        [field: DocumentedByXml, Restricted]
-        public BooleanAction GrabProxy { get; protected set; }
+        public BooleanAction GrabProxy
+        {
+            get
+            {
+                return grabProxy;
+            }
+            protected set
+            {
+                grabProxy = value;
+            }
+        }
+        [Tooltip("The EmptyEventProxyEmitter that is executed on the Interactor's grab action.")]
+        [SerializeField]
+        [Restricted]
+        private EmptyEventProxyEmitter grabProxyActions;
         /// <summary>
         /// The <see cref="EmptyEventProxyEmitter"/> that is executed on the Interactor's grab action.
         /// </summary>
-        [Serialized]
-        [field: DocumentedByXml, Restricted]
-        public EmptyEventProxyEmitter GrabProxyActions { get; protected set; }
+        public EmptyEventProxyEmitter GrabProxyActions
+        {
+            get
+            {
+                return grabProxyActions;
+            }
+            protected set
+            {
+                grabProxyActions = value;
+            }
+        }
+        [Tooltip("The CountdownTimer that controls when the pointer is reactivated.")]
+        [SerializeField]
+        [Restricted]
+        private CountdownTimer reactivatePointerTimer;
         /// <summary>
         /// The <see cref="CountdownTimer"/> that controls when the pointer is reactivated.
         /// </summary>
-        [Serialized]
-        [field: DocumentedByXml, Restricted]
-        public CountdownTimer ReactivatePointerTimer { get; protected set; }
+        public CountdownTimer ReactivatePointerTimer
+        {
+            get
+            {
+                return reactivatePointerTimer;
+            }
+            protected set
+            {
+                reactivatePointerTimer = value;
+            }
+        }
+        [Tooltip("The container for the logic that enables the pointer.")]
+        [SerializeField]
+        [Restricted]
+        private GameObject enablePointerContainer;
         /// <summary>
         /// The container for the logic that enables the pointer.
         /// </summary>
-        [Serialized]
-        [field: DocumentedByXml, Restricted]
-        public GameObject EnablePointerContainer { get; protected set; }
+        public GameObject EnablePointerContainer
+        {
+            get
+            {
+                return enablePointerContainer;
+            }
+            protected set
+            {
+                enablePointerContainer = value;
+            }
+        }
+        [Tooltip("The RuleContainerObservableList that controls pointer target validity.")]
+        [SerializeField]
+        [Restricted]
+        private RuleContainerObservableList targetValidityRules;
         /// <summary>
         /// The <see cref="RuleContainerObservableList"/> that controls pointer target validity.
         /// </summary>
-        [Serialized]
-        [field: DocumentedByXml, Restricted]
-        public RuleContainerObservableList TargetValidityRules { get; protected set; }
+        public RuleContainerObservableList TargetValidityRules
+        {
+            get
+            {
+                return targetValidityRules;
+            }
+            protected set
+            {
+                targetValidityRules = value;
+            }
+        }
+        [Tooltip("An InteractorFacade that is used to simulate touch events with the pointer.")]
+        [SerializeField]
+        [Restricted]
+        private InteractorFacade simulatedInteractor;
         /// <summary>
         /// An <see cref="InteractorFacade"/> that is used to simulate touch events with the pointer.
         /// </summary>
-        [Serialized]
-        [field: DocumentedByXml, Restricted]
-        public InteractorFacade SimulatedInteractor { get; protected set; }
+        public InteractorFacade SimulatedInteractor
+        {
+            get
+            {
+                return simulatedInteractor;
+            }
+            protected set
+            {
+                simulatedInteractor = value;
+            }
+        }
         #endregion
 
         /// <summary>

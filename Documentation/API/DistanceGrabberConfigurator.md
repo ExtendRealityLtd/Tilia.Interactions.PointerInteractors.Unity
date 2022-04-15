@@ -180,7 +180,7 @@ public bool ForceKinematicOnTransition { get; set; }
 
 #### Grabber
 
-The [InteractableGrabber] that initiates the grabbing.
+The InteractableGrabber that initiates the grabbing.
 
 ##### Declaration
 
@@ -609,7 +609,6 @@ protected virtual void UnregisterInteractorListeners()
 [Tilia.Interactions.PointerInteractors]: README.md
 [DistanceGrabberConfigurator]: DistanceGrabberConfigurator.md
 [DistanceGrabberFacade]: DistanceGrabberFacade.md
-[InteractableGrabber]: InteractableGrabber.md
 [cachedKinematicState]: DistanceGrabberConfigurator.md#cachedKinematicState
 [Inheritance]: #Inheritance
 [Namespace]: #Namespace
