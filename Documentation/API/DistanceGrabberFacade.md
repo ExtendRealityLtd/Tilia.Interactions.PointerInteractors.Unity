@@ -21,12 +21,17 @@ The public interface into the DistanceGrabber Prefab.
   * [TransitionDuration]
   * [UngrabDelay]
 * [Methods]
+  * [ClearFollowSource()]
+  * [ClearInteractor()]
+  * [ClearRaycastRules()]
+  * [ClearTargetValidity()]
   * [OnAfterConfigureReactivatePointerTimerChange()]
   * [OnAfterFollowSourceChange()]
   * [OnAfterInteractorChange()]
   * [OnAfterRaycastRulesChange()]
   * [OnAfterTargetValidityChange()]
   * [OnAfterTransitionDurationChange()]
+  * [OnAfterUngrabDelayChange()]
 
 ## Details
 
@@ -96,7 +101,7 @@ The current InteractableFacade being distance grabbed.
 ##### Declaration
 
 ```
-public InteractableFacade CurrentInteractable { get; }
+public virtual InteractableFacade CurrentInteractable { get; }
 ```
 
 #### FollowSource
@@ -161,13 +166,52 @@ public float UngrabDelay { get; set; }
 
 ### Methods
 
-#### OnAfterConfigureReactivatePointerTimerChange()
+#### ClearFollowSource()
 
-Called after [UngrabDelay] has been changed.
+Clears [FollowSource].
 
 ##### Declaration
 
 ```
+public virtual void ClearFollowSource()
+```
+
+#### ClearInteractor()
+
+Clears [Interactor].
+
+##### Declaration
+
+```
+public virtual void ClearInteractor()
+```
+
+#### ClearRaycastRules()
+
+Clears [RaycastRules].
+
+##### Declaration
+
+```
+public virtual void ClearRaycastRules()
+```
+
+#### ClearTargetValidity()
+
+Clears [TargetValidity].
+
+##### Declaration
+
+```
+public virtual void ClearTargetValidity()
+```
+
+#### OnAfterConfigureReactivatePointerTimerChange()
+
+##### Declaration
+
+```
+[Obsolete("Use `OnAfterUngrabDelayChange` instead.")]
 protected virtual void OnAfterConfigureReactivatePointerTimerChange()
 ```
 
@@ -221,16 +265,30 @@ Called after [TransitionDuration] has been changed.
 protected virtual void OnAfterTransitionDurationChange()
 ```
 
+#### OnAfterUngrabDelayChange()
+
+Called after [UngrabDelay] has been changed.
+
+##### Declaration
+
+```
+protected virtual void OnAfterUngrabDelayChange()
+```
+
 [Tilia.Interactions.PointerInteractors]: README.md
 [DistanceGrabberFacade.UnityEvent]: DistanceGrabberFacade.UnityEvent.md
 [DistanceGrabberConfigurator]: DistanceGrabberConfigurator.md
 [Interactor]: DistanceGrabberFacade.md#Interactor
-[UngrabDelay]: DistanceGrabberFacade.md#UngrabDelay
+[FollowSource]: DistanceGrabberFacade.md#FollowSource
+[Interactor]: DistanceGrabberFacade.md#Interactor
+[RaycastRules]: DistanceGrabberFacade.md#RaycastRules
+[TargetValidity]: DistanceGrabberFacade.md#TargetValidity
 [FollowSource]: DistanceGrabberFacade.md#FollowSource
 [Interactor]: DistanceGrabberFacade.md#Interactor
 [RaycastRules]: DistanceGrabberFacade.md#RaycastRules
 [TargetValidity]: DistanceGrabberFacade.md#TargetValidity
 [TransitionDuration]: DistanceGrabberFacade.md#TransitionDuration
+[UngrabDelay]: DistanceGrabberFacade.md#UngrabDelay
 [Inheritance]: #Inheritance
 [Namespace]: #Namespace
 [Syntax]: #Syntax
@@ -248,9 +306,14 @@ protected virtual void OnAfterTransitionDurationChange()
 [TransitionDuration]: #TransitionDuration
 [UngrabDelay]: #UngrabDelay
 [Methods]: #Methods
+[ClearFollowSource()]: #ClearFollowSource
+[ClearInteractor()]: #ClearInteractor
+[ClearRaycastRules()]: #ClearRaycastRules
+[ClearTargetValidity()]: #ClearTargetValidity
 [OnAfterConfigureReactivatePointerTimerChange()]: #OnAfterConfigureReactivatePointerTimerChange
 [OnAfterFollowSourceChange()]: #OnAfterFollowSourceChange
 [OnAfterInteractorChange()]: #OnAfterInteractorChange
 [OnAfterRaycastRulesChange()]: #OnAfterRaycastRulesChange
 [OnAfterTargetValidityChange()]: #OnAfterTargetValidityChange
 [OnAfterTransitionDurationChange()]: #OnAfterTransitionDurationChange
+[OnAfterUngrabDelayChange()]: #OnAfterUngrabDelayChange
