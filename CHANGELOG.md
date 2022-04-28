@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.0.0](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.10.9...v2.0.0) (2022-04-28)
+
+#### :warning: BREAKING CHANGES :warning:
+
+* **Malimbe:** This removes the last remaining elements of Malimbe and whilst it does not cause any breaking changes within this package, it removes Malimbe as a dependency which other projects that rely on this package may piggy back off this Malimbe dependency so it will break any project like that.
+
+All of the previous functionality from Malimbe has been replicated in standard code without the need for it to be weaved by the Malimbe helper tags. ([1bd5a76](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/1bd5a76ceb731625b6a593198de55b4f5d9fe253))
+
+#### Features
+
+* **Malimbe:** remove malimbe dependency ([1bd5a76](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/1bd5a76ceb731625b6a593198de55b4f5d9fe253))
+
 ### [1.10.9](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v1.10.8...v1.10.9) (2022-03-15)
 
 #### Miscellaneous Chores
