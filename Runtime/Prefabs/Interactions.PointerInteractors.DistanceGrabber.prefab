@@ -1502,6 +1502,7 @@ GameObject:
   - component: {fileID: 7533518594173930137}
   - component: {fileID: 7533518594173930136}
   - component: {fileID: 7393450506313436259}
+  - component: {fileID: 2460182061687048909}
   m_Layer: 0
   m_Name: Interactions.PointerInteractors.DistanceGrabber
   m_TagString: Untagged
@@ -1543,7 +1544,7 @@ MonoBehaviour:
   ungrabDelay: 1
   targetValidity:
     field: {fileID: 7393450506313436259}
-  raycastRules: {fileID: 0}
+  raycastRules: {fileID: 2460182061687048909}
   BeforeGrabbed:
     m_PersistentCalls:
       m_Calls: []
@@ -1568,6 +1569,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoRejectStates: -1
   rules: {fileID: 7905425836278180756}
+--- !u!114 &2460182061687048909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7533518594173930138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 406d478cdbf496a4ead48dfdc7df8d0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layersToIgnore:
+    serializedVersion: 2
+    m_Bits: 4
+  triggerInteraction: 1
+  convertTo: {fileID: 0}
 --- !u!1 &7533518594224638937
 GameObject:
   m_ObjectHideFlags: 0
