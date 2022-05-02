@@ -17,6 +17,7 @@ Sets up the DistanceGrabber Prefab based on the provided user settings.
   * [AlwaysCreateGrabPoint]
   * [DisablePointerOnInteractorTouch]
   * [EnablePointerContainer]
+  * [EnablePointerLogic]
   * [Facade]
   * [ForceKinematicOnTransition]
   * [Grabber]
@@ -156,6 +157,16 @@ The container for the logic that enables the pointer.
 
 ```
 public GameObject EnablePointerContainer { get; protected set; }
+```
+
+#### EnablePointerLogic
+
+The logic that enables the pointer.
+
+##### Declaration
+
+```
+public EmptyEventProxyEmitter EnablePointerLogic { get; protected set; }
 ```
 
 #### Facade
@@ -623,6 +634,7 @@ protected virtual void UnregisterInteractorListeners()
 [AlwaysCreateGrabPoint]: #AlwaysCreateGrabPoint
 [DisablePointerOnInteractorTouch]: #DisablePointerOnInteractorTouch
 [EnablePointerContainer]: #EnablePointerContainer
+[EnablePointerLogic]: #EnablePointerLogic
 [Facade]: #Facade
 [ForceKinematicOnTransition]: #ForceKinematicOnTransition
 [Grabber]: #Grabber
