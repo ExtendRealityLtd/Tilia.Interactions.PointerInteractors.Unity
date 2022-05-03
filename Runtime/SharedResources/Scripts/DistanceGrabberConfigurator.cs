@@ -279,6 +279,24 @@
                 enablePointerContainer = value;
             }
         }
+        [Tooltip("The logic that enables the pointer.")]
+        [SerializeField]
+        [Restricted]
+        private EmptyEventProxyEmitter enablePointerLogic;
+        /// <summary>
+        /// The logic that enables the pointer.
+        /// </summary>
+        public EmptyEventProxyEmitter EnablePointerLogic
+        {
+            get
+            {
+                return enablePointerLogic;
+            }
+            protected set
+            {
+                enablePointerLogic = value;
+            }
+        }
         [Tooltip("The RuleContainerObservableList that controls pointer target validity.")]
         [SerializeField]
         [Restricted]
@@ -646,7 +664,17 @@
         protected virtual void HasUntouched(InteractableFacade interactable)
         {
             EnablePointerContainer.SetActive(true);
-            if (!DisablePointerOnInteractorTouch || ShouldIgnoreEnablePointer)
+            if (ShouldIgnoreEnablePointer)
+            {
+                if (interactable == null || !interactable.gameObject.activeInHierarchy)
+                {
+                    EnablePointerLogic.Receive();
+                    ShouldIgnoreEnablePointer = false;
+                }
+                return;
+            }
+
+            if (!DisablePointerOnInteractorTouch)
             {
                 return;
             }
