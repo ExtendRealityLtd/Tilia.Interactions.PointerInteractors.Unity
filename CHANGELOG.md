@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.1.0](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v2.0.6...v2.1.0) (2022-05-03)
+
+#### Features
+
+* **prefabs:** utilise new hover validity to prevent unwanted touches ([582f08c](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/582f08cfc36b474d51626c1dd54b8a580677fcb7))
+  > The Pointer Facade now allows a hover validity restriction rule which is now used to prevent the pointer grabber from touching things it should not be allowed to touch, such as controllables.
+
+#### Bug Fixes
+
+* **prefabs:** ensure pointer is re-enabled if interactable disabled ([558c75b](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/558c75bf6e92a655f2865b520ee2fd1c91cf8f81))
+  > If the Interactable is disabled or destroyed after the pointer grabber has grabbed it, then the relevant logic to re-enable the pointer grabber wasn't being run and therefore the pointer grabber was no longer working.
+  > 
+  > This fix checks to see if the grabbed interactable is still available in the scene and if its not then it forcefully calls the enable pointer logic to ensure it is re-enabled correctly.
+* **prefabs:** prevent collision with trigger colliders ([b03d2bf](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/b03d2bf93ce9741a6b8a9755a9f1d60864bc1152))
+  > The Distance Grabber Facade now has a custom Physics Cast component that will ensure trigger colliders are ignored by the pointer otherwise it will be able to be stopped by trigger colliders which isn't the intended outcome.
+
 ### [2.0.6](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v2.0.5...v2.0.6) (2022-05-02)
 
 #### Miscellaneous Chores
