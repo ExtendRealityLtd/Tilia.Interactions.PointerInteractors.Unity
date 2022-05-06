@@ -10,6 +10,7 @@ Sets up the DistanceGrabber Prefab based on the provided user settings.
 * [Fields]
   * [cachedInteractorPrecognitionValue]
   * [cachedKinematicState]
+  * [checkInteractableActiveRoutine]
   * [grabPoint]
   * [hasSubscribedToInteractorEvents]
   * [ValidConfigurators]
@@ -33,7 +34,9 @@ Sets up the DistanceGrabber Prefab based on the provided user settings.
   * [TargetValidityRules]
   * [UngrabListener]
 * [Methods]
+  * [CancelCheckInteractableActiveRoutine()]
   * [CanCreateGrabPoint(GrabInteractableAction)]
+  * [CheckInteractableIsNotActiveAtEndOfFrame(InteractableFacade)]
   * [ConfigureInteractor()]
   * [ConfigurePointerRules()]
   * [ConfigurePropertyApplier()]
@@ -95,6 +98,16 @@ The kinematic state of the InteractableFacade.InteractableRigidbody before the t
 
 ```
 protected bool cachedKinematicState
+```
+
+#### checkInteractableActiveRoutine
+
+A coroutine for managing the if interactable is active check.
+
+##### Declaration
+
+```
+protected Coroutine checkInteractableActiveRoutine
 ```
 
 #### grabPoint
@@ -311,6 +324,16 @@ public EmptyEventProxyEmitter UngrabListener { get; protected set; }
 
 ### Methods
 
+#### CancelCheckInteractableActiveRoutine()
+
+Cancels the if interactable is active coroutine check.
+
+##### Declaration
+
+```
+protected virtual void CancelCheckInteractableActiveRoutine()
+```
+
 #### CanCreateGrabPoint(GrabInteractableAction)
 
 Determines whether the grab point can be created for the given action.
@@ -332,6 +355,28 @@ protected virtual bool CanCreateGrabPoint(GrabInteractableAction action)
 | Type | Description |
 | --- | --- |
 | System.Boolean | Whether the grab point can be created. |
+
+#### CheckInteractableIsNotActiveAtEndOfFrame(InteractableFacade)
+
+Checks if the given interactable is not active after the end of the frame and peforms an ungrab if it is no longer active.
+
+##### Declaration
+
+```
+protected virtual IEnumerator CheckInteractableIsNotActiveAtEndOfFrame(InteractableFacade interactable)
+```
+
+##### Parameters
+
+| Type | Name | Description |
+| --- | --- | --- |
+| InteractableFacade | interactable | The interactable to check. |
+
+##### Returns
+
+| Type | Description |
+| --- | --- |
+| System.Collections.IEnumerator | An Enumerator to manage the running of the Coroutine. |
 
 #### ConfigureInteractor()
 
@@ -627,6 +672,7 @@ protected virtual void UnregisterInteractorListeners()
 [Fields]: #Fields
 [cachedInteractorPrecognitionValue]: #cachedInteractorPrecognitionValue
 [cachedKinematicState]: #cachedKinematicState
+[checkInteractableActiveRoutine]: #checkInteractableActiveRoutine
 [grabPoint]: #grabPoint
 [hasSubscribedToInteractorEvents]: #hasSubscribedToInteractorEvents
 [ValidConfigurators]: #ValidConfigurators
@@ -650,7 +696,9 @@ protected virtual void UnregisterInteractorListeners()
 [TargetValidityRules]: #TargetValidityRules
 [UngrabListener]: #UngrabListener
 [Methods]: #Methods
+[CancelCheckInteractableActiveRoutine()]: #CancelCheckInteractableActiveRoutine
 [CanCreateGrabPoint(GrabInteractableAction)]: #CanCreateGrabPointGrabInteractableAction
+[CheckInteractableIsNotActiveAtEndOfFrame(InteractableFacade)]: #CheckInteractableIsNotActiveAtEndOfFrameInteractableFacade
 [ConfigureInteractor()]: #ConfigureInteractor
 [ConfigurePointerRules()]: #ConfigurePointerRules
 [ConfigurePropertyApplier()]: #ConfigurePropertyApplier

@@ -356,6 +356,10 @@
         /// The current grab precognition value for the associated Interactor.
         /// </summary>
         protected float cachedInteractorPrecognitionValue;
+        /// <summary>
+        /// A coroutine for managing the if interactable is active check.
+        /// </summary>
+        protected Coroutine checkInteractableActiveRoutine;
 
         /// <summary>
         /// A global static list of <see cref="DistanceGrabberConfigurator"/> for look up.
@@ -698,7 +702,46 @@
         /// <param name="interactable">The Interactable being grabbed.</param>
         protected virtual void PerformUngrab(InteractableFacade interactable)
         {
+            if (interactable != null && checkInteractableActiveRoutine == null)
+            {
+                checkInteractableActiveRoutine = StartCoroutine(CheckInteractableIsNotActiveAtEndOfFrame(interactable));
+            }
+
             UngrabListener.Receive();
+        }
+
+        /// <summary>
+        /// Cancels the if interactable is active coroutine check.
+        /// </summary>
+        protected virtual void CancelCheckInteractableActiveRoutine()
+        {
+            if (checkInteractableActiveRoutine != null)
+            {
+                StopCoroutine(checkInteractableActiveRoutine);
+                checkInteractableActiveRoutine = null;
+            }
+        }
+
+        /// <summary>
+        /// Checks if the given interactable is not active after the end of the frame and peforms an ungrab if it is no longer active.
+        /// </summary>
+        /// <param name="interactable">The interactable to check.</param>
+        /// <returns>An Enumerator to manage the running of the Coroutine.</returns>
+        protected virtual IEnumerator CheckInteractableIsNotActiveAtEndOfFrame(InteractableFacade interactable)
+        {
+            if (interactable == null)
+            {
+                yield break;
+            }
+
+            yield return new WaitForEndOfFrame();
+            if (!interactable.gameObject.activeInHierarchy)
+            {
+                EnablePointerContainer.SetActive(true);
+                PerformUngrab(interactable);
+            }
+
+            checkInteractableActiveRoutine = null;
         }
     }
 }
