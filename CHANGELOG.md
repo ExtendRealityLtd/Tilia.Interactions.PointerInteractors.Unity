@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.1.2](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v2.1.1...v2.1.2) (2022-05-06)
+
+#### Bug Fixes
+
+* **Configurator:** reenable pointer on interactable disabled on ungrab ([5abfde1](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/5abfde146bf190b59dca0e8f2b38a8588725a6f5))
+  > This fixes an issue where if the grabbed interactable is disabled when it has been ungrabbed but the untouched event does not occur in time then the pointer would not re-enable. This now waits a frame and checks to see if the ungrabbed object is still active in the scene and if not then it re-enables the pointer logic as expected.
+
 ### [2.1.1](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v2.1.0...v2.1.1) (2022-05-05)
 
 #### Miscellaneous Chores
