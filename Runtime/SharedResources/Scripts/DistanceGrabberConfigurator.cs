@@ -9,6 +9,7 @@
     using UnityEngine;
     using Zinnia.Action;
     using Zinnia.Data.Attribute;
+    using Zinnia.Data.Type;
     using Zinnia.Event.Proxy;
     using Zinnia.Extension;
     using Zinnia.Rule.Collection;
@@ -333,6 +334,42 @@
                 simulatedInteractor = value;
             }
         }
+        [Tooltip("The container for the simulate touch logic.")]
+        [SerializeField]
+        [Restricted]
+        private GameObject simulateTouchContainer;
+        /// <summary>
+        /// The container for the simulate touch logic.
+        /// </summary>
+        public GameObject SimulateTouchContainer
+        {
+            get
+            {
+                return simulateTouchContainer;
+            }
+            protected set
+            {
+                simulateTouchContainer = value;
+            }
+        }
+        [Tooltip("The container for the simulate grab logic.")]
+        [SerializeField]
+        [Restricted]
+        private GameObject simulateGrabContainer;
+        /// <summary>
+        /// The container for the simulate grab logic.
+        /// </summary>
+        public GameObject SimulateGrabContainer
+        {
+            get
+            {
+                return simulateGrabContainer;
+            }
+            protected set
+            {
+                simulateGrabContainer = value;
+            }
+        }
         #endregion
 
         /// <summary>
@@ -537,7 +574,7 @@
         /// <param name="interactable">The Interactable to simulate the touch on.</param>
         public virtual void SimulateTouch(InteractableFacade interactable)
         {
-            if (interactable == null)
+            if (interactable == null || !interactable.TouchEnabled)
             {
                 return;
             }
@@ -551,12 +588,27 @@
         /// <param name="interactable">The Interactable to simulate the untouch on.</param>
         public virtual void SimulateUntouch(InteractableFacade interactable)
         {
-            if (interactable == null)
+            if (interactable == null || !interactable.TouchEnabled)
             {
                 return;
             }
 
             interactable.Configuration.TouchConfiguration.NotifyUntouch(SimulatedInteractor.gameObject);
+        }
+
+        public virtual void CheckGrabValidity(SurfaceData data)
+        {
+            if (data == null || data.CollisionData.transform == null)
+            {
+                return;
+            }
+
+            InteractableFacade interactable = data.CollisionData.transform.GetComponent<InteractableFacade>();
+
+            if (interactable != null && !interactable.GrabEnabled)
+            {
+                SimulateGrabContainer.SetActive(false);
+            }
         }
 
         protected virtual void OnEnable()

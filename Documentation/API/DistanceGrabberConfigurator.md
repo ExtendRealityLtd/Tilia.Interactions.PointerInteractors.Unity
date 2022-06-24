@@ -31,11 +31,14 @@ Sets up the DistanceGrabber Prefab based on the provided user settings.
   * [ReactivatePointerTimer]
   * [ShouldIgnoreEnablePointer]
   * [SimulatedInteractor]
+  * [SimulateGrabContainer]
+  * [SimulateTouchContainer]
   * [TargetValidityRules]
   * [UngrabListener]
 * [Methods]
   * [CancelCheckInteractableActiveRoutine()]
   * [CanCreateGrabPoint(GrabInteractableAction)]
+  * [CheckGrabValidity(SurfaceData)]
   * [CheckInteractableIsNotActiveAtEndOfFrame(InteractableFacade)]
   * [ConfigureInteractor()]
   * [ConfigurePointerRules()]
@@ -302,6 +305,26 @@ An InteractorFacade that is used to simulate touch events with the pointer.
 public InteractorFacade SimulatedInteractor { get; protected set; }
 ```
 
+#### SimulateGrabContainer
+
+The container for the simulate grab logic.
+
+##### Declaration
+
+```
+public GameObject SimulateGrabContainer { get; protected set; }
+```
+
+#### SimulateTouchContainer
+
+The container for the simulate touch logic.
+
+##### Declaration
+
+```
+public GameObject SimulateTouchContainer { get; protected set; }
+```
+
 #### TargetValidityRules
 
 The RuleContainerObservableList that controls pointer target validity.
@@ -355,6 +378,20 @@ protected virtual bool CanCreateGrabPoint(GrabInteractableAction action)
 | Type | Description |
 | --- | --- |
 | System.Boolean | Whether the grab point can be created. |
+
+#### CheckGrabValidity(SurfaceData)
+
+##### Declaration
+
+```
+public virtual void CheckGrabValidity(SurfaceData data)
+```
+
+##### Parameters
+
+| Type | Name | Description |
+| --- | --- | --- |
+| SurfaceData | data | n/a |
 
 #### CheckInteractableIsNotActiveAtEndOfFrame(InteractableFacade)
 
@@ -693,11 +730,14 @@ protected virtual void UnregisterInteractorListeners()
 [ReactivatePointerTimer]: #ReactivatePointerTimer
 [ShouldIgnoreEnablePointer]: #ShouldIgnoreEnablePointer
 [SimulatedInteractor]: #SimulatedInteractor
+[SimulateGrabContainer]: #SimulateGrabContainer
+[SimulateTouchContainer]: #SimulateTouchContainer
 [TargetValidityRules]: #TargetValidityRules
 [UngrabListener]: #UngrabListener
 [Methods]: #Methods
 [CancelCheckInteractableActiveRoutine()]: #CancelCheckInteractableActiveRoutine
 [CanCreateGrabPoint(GrabInteractableAction)]: #CanCreateGrabPointGrabInteractableAction
+[CheckGrabValidity(SurfaceData)]: #CheckGrabValiditySurfaceData
 [CheckInteractableIsNotActiveAtEndOfFrame(InteractableFacade)]: #CheckInteractableIsNotActiveAtEndOfFrameInteractableFacade
 [ConfigureInteractor()]: #ConfigureInteractor
 [ConfigurePointerRules()]: #ConfigurePointerRules
