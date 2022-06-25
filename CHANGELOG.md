@@ -1,5 +1,14 @@
 # Changelog
 
+### [2.1.19](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v2.1.18...v2.1.19) (2022-06-25)
+
+#### Bug Fixes
+
+* **Configurator:** honour the interactable disabled states ([b6232db](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/b6232dba2bc0c7873f86cf04bda53851d194540c))
+  > The Interactable can have the touch and grab states disabled meaning the interactable is not touchable/grabbable. However, the pointer interactor was still attempting to touch and grab the interactable even if the Touch/Grab was disabled.
+  > 
+  > This fix attempts to short circuit the logic by checking the interactable touch and grab state in the appropriate point in the logic.
+
 ### [2.1.18](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v2.1.17...v2.1.18) (2022-06-19)
 
 #### Miscellaneous Chores
