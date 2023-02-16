@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.1.29](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v2.1.28...v2.1.29) (2023-02-16)
+
+#### Miscellaneous Chores
+
+* **deps:** bump io.extendreality.tilia.interactions.interactables.unity ([20ab856](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/20ab85649739bac4e66ad069f07b398c9b82d0e9))
+  > Bumps [io.extendreality.tilia.interactions.interactables.unity](https://github.com/ExtendRealityLtd/Tilia.Interactions.Interactables.Unity) from 2.9.0 to 2.9.1. - [Release notes](https://github.com/ExtendRealityLtd/Tilia.Interactions.Interactables.Unity/releases) - [Changelog](https://github.com/ExtendRealityLtd/Tilia.Interactions.Interactables.Unity/blob/master/CHANGELOG.md) - [Commits](https://github.com/ExtendRealityLtd/Tilia.Interactions.Interactables.Unity/compare/v2.9.0...v2.9.1)
+
 ### [2.1.28](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v2.1.27...v2.1.28) (2023-02-16)
 
 #### Miscellaneous Chores
