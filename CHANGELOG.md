@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.1.34](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v2.1.33...v2.1.34) (2023-02-22)
+
+#### Miscellaneous Chores
+
+* **deps:** bump io.extendreality.zinnia.unity from 2.5.0 to 2.6.0 ([bb0970b](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/bb0970b3299b2589192829cf5ebd9b341de7b85b))
+  > Bumps [io.extendreality.zinnia.unity](https://github.com/ExtendRealityLtd/Zinnia.Unity) from 2.5.0 to 2.6.0. - [Release notes](https://github.com/ExtendRealityLtd/Zinnia.Unity/releases) - [Changelog](https://github.com/ExtendRealityLtd/Zinnia.Unity/blob/master/CHANGELOG.md) - [Commits](https://github.com/ExtendRealityLtd/Zinnia.Unity/compare/v2.5.0...v2.6.0)
+
 ### [2.1.33](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v2.1.32...v2.1.33) (2023-02-19)
 
 #### Miscellaneous Chores
