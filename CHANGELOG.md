@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v2.1.70...v2.2.0) (2023-05-02)
+
+#### Features
+
+* **Prefabs:** add pointer grabber prefab ([0b49bab](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/0b49bab08ef6389514f5891e0f220035ca349e51))
+  > The PointerGrabber casts a straight pointer that has an interactor embedded within the pointer cursor and can be used to grab objects at a distance. The pointer then switches to a fixed length upon grab and the length of the pointer can be controlled by a float axis value.
+
 ### [2.1.70](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v2.1.69...v2.1.70) (2023-05-02)
 
 #### Miscellaneous Chores
