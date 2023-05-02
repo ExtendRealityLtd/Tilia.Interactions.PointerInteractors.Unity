@@ -91,7 +91,7 @@ The linked Internal Setup.
 ##### Declaration
 
 ```
-public DistanceGrabberConfigurator Configuration { get; protected set; }
+public DistanceGrabberConfigurator Configuration { get; set; }
 ```
 
 #### CurrentInteractable

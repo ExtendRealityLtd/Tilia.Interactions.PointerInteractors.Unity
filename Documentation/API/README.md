@@ -14,6 +14,14 @@ The public interface into the DistanceGrabber Prefab.
 
 Defines the event with the InteractableFacade.
 
+#### [PointerGrabberConfigurator]
+
+#### [PointerGrabberFacade]
+
+The public interface into the PointerGrabber Prefab.
+
 [DistanceGrabberConfigurator]: DistanceGrabberConfigurator.md
 [DistanceGrabberFacade]: DistanceGrabberFacade.md
 [DistanceGrabberFacade.UnityEvent]: DistanceGrabberFacade.UnityEvent.md
+[PointerGrabberConfigurator]: PointerGrabberConfigurator.md
+[PointerGrabberFacade]: PointerGrabberFacade.md
