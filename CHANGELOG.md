@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.2.1](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v2.2.0...v2.2.1) (2023-05-02)
+
+#### Bug Fixes
+
+* **API:** add missing documentation ([9159ebf](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/9159ebf8d314ac69db6b833dcc2f0566895bc9ba))
+  > The documentation for the new pointer grabber was not auto generated and was therefore missing. It has now been added.
+
 ## [2.2.0](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v2.1.70...v2.2.0) (2023-05-02)
 
 #### Features
