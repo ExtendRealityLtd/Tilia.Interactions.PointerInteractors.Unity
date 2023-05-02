@@ -16,11 +16,20 @@ namespace Tilia.Interactions.PointerInteractors.Utility
         private const string prefabSuffix = ".prefab";
 
         private const string prefabPointerInteractorsDistanceGrabber = "Interactions.PointerInteractors.DistanceGrabber";
+        private const string prefabPointerInteractorsPointerGrabber = "Interactions.PointerInteractors.PointerGrabber";
 
         [MenuItem(menuItemRoot + prefabPointerInteractorsDistanceGrabber, false, priority)]
         private static void AddPointerInteractorsDistanceGrabber()
         {
             string prefab = prefabPointerInteractorsDistanceGrabber + prefabSuffix;
+            string packageLocation = Path.Combine(packageRoot, package, baseDirectory, prefabDirectory, prefab);
+            CreatePrefab(packageLocation);
+        }
+
+        [MenuItem(menuItemRoot + prefabPointerInteractorsPointerGrabber, false, priority)]
+        private static void AddPointerInteractorsPointerGrabber()
+        {
+            string prefab = prefabPointerInteractorsPointerGrabber + prefabSuffix;
             string packageLocation = Path.Combine(packageRoot, package, baseDirectory, prefabDirectory, prefab);
             CreatePrefab(packageLocation);
         }

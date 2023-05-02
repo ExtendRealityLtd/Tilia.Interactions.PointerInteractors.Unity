@@ -36,7 +36,7 @@
             {
                 return facade;
             }
-            protected set
+            set
             {
                 facade = value;
             }
@@ -113,7 +113,7 @@
             {
                 return pointerContainer;
             }
-            protected set
+            set
             {
                 pointerContainer = value;
             }
@@ -131,7 +131,7 @@
             {
                 return pointer;
             }
-            protected set
+            set
             {
                 pointer = value;
             }
@@ -149,7 +149,7 @@
             {
                 return grabber;
             }
-            protected set
+            set
             {
                 grabber = value;
             }
@@ -167,7 +167,7 @@
             {
                 return propertyApplier;
             }
-            protected set
+            set
             {
                 propertyApplier = value;
             }
@@ -185,7 +185,7 @@
             {
                 return grabListener;
             }
-            protected set
+            set
             {
                 grabListener = value;
             }
@@ -203,7 +203,7 @@
             {
                 return ungrabListener;
             }
-            protected set
+            set
             {
                 ungrabListener = value;
             }
@@ -221,7 +221,7 @@
             {
                 return grabProxy;
             }
-            protected set
+            set
             {
                 grabProxy = value;
             }
@@ -239,7 +239,7 @@
             {
                 return grabProxyActions;
             }
-            protected set
+            set
             {
                 grabProxyActions = value;
             }
@@ -257,7 +257,7 @@
             {
                 return reactivatePointerTimer;
             }
-            protected set
+            set
             {
                 reactivatePointerTimer = value;
             }
@@ -275,7 +275,7 @@
             {
                 return enablePointerContainer;
             }
-            protected set
+            set
             {
                 enablePointerContainer = value;
             }
@@ -293,7 +293,7 @@
             {
                 return enablePointerLogic;
             }
-            protected set
+            set
             {
                 enablePointerLogic = value;
             }
@@ -311,7 +311,7 @@
             {
                 return targetValidityRules;
             }
-            protected set
+            set
             {
                 targetValidityRules = value;
             }
@@ -329,7 +329,7 @@
             {
                 return simulatedInteractor;
             }
-            protected set
+            set
             {
                 simulatedInteractor = value;
             }
@@ -347,7 +347,7 @@
             {
                 return simulateTouchContainer;
             }
-            protected set
+            set
             {
                 simulateTouchContainer = value;
             }
@@ -365,7 +365,7 @@
             {
                 return simulateGrabContainer;
             }
-            protected set
+            set
             {
                 simulateGrabContainer = value;
             }
