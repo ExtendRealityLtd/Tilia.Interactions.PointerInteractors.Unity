@@ -172,7 +172,7 @@ The container for the logic that enables the pointer.
 ##### Declaration
 
 ```
-public GameObject EnablePointerContainer { get; protected set; }
+public GameObject EnablePointerContainer { get; set; }
 ```
 
 #### EnablePointerLogic
@@ -182,7 +182,7 @@ The logic that enables the pointer.
 ##### Declaration
 
 ```
-public EmptyEventProxyEmitter EnablePointerLogic { get; protected set; }
+public EmptyEventProxyEmitter EnablePointerLogic { get; set; }
 ```
 
 #### Facade
@@ -192,7 +192,7 @@ The public facade.
 ##### Declaration
 
 ```
-public DistanceGrabberFacade Facade { get; protected set; }
+public DistanceGrabberFacade Facade { get; set; }
 ```
 
 #### ForceKinematicOnTransition
@@ -212,7 +212,7 @@ The InteractableGrabber that initiates the grabbing.
 ##### Declaration
 
 ```
-public InteractableGrabber Grabber { get; protected set; }
+public InteractableGrabber Grabber { get; set; }
 ```
 
 #### GrabListener
@@ -222,7 +222,7 @@ The EmptyEventProxyEmitter that runs the grab logic.
 ##### Declaration
 
 ```
-public EmptyEventProxyEmitter GrabListener { get; protected set; }
+public EmptyEventProxyEmitter GrabListener { get; set; }
 ```
 
 #### GrabProxy
@@ -232,7 +232,7 @@ The BooleanAction that proxies the Interactor's grab action.
 ##### Declaration
 
 ```
-public BooleanAction GrabProxy { get; protected set; }
+public BooleanAction GrabProxy { get; set; }
 ```
 
 #### GrabProxyActions
@@ -242,7 +242,7 @@ The EmptyEventProxyEmitter that is executed on the Interactor's grab action.
 ##### Declaration
 
 ```
-public EmptyEventProxyEmitter GrabProxyActions { get; protected set; }
+public EmptyEventProxyEmitter GrabProxyActions { get; set; }
 ```
 
 #### Pointer
@@ -252,7 +252,7 @@ The PointerFacade to initiate the grabbing.
 ##### Declaration
 
 ```
-public PointerFacade Pointer { get; protected set; }
+public PointerFacade Pointer { get; set; }
 ```
 
 #### PointerContainer
@@ -262,7 +262,7 @@ The containing GameObject of the pointer logic.
 ##### Declaration
 
 ```
-public GameObject PointerContainer { get; protected set; }
+public GameObject PointerContainer { get; set; }
 ```
 
 #### PropertyApplier
@@ -272,7 +272,7 @@ The TransformPropertyApplier that transitions the Interactable to the Interactor
 ##### Declaration
 
 ```
-public TransformPropertyApplier PropertyApplier { get; protected set; }
+public TransformPropertyApplier PropertyApplier { get; set; }
 ```
 
 #### ReactivatePointerTimer
@@ -282,7 +282,7 @@ The CountdownTimer that controls when the pointer is reactivated.
 ##### Declaration
 
 ```
-public CountdownTimer ReactivatePointerTimer { get; protected set; }
+public CountdownTimer ReactivatePointerTimer { get; set; }
 ```
 
 #### ShouldIgnoreEnablePointer
@@ -302,7 +302,7 @@ An InteractorFacade that is used to simulate touch events with the pointer.
 ##### Declaration
 
 ```
-public InteractorFacade SimulatedInteractor { get; protected set; }
+public InteractorFacade SimulatedInteractor { get; set; }
 ```
 
 #### SimulateGrabContainer
@@ -312,7 +312,7 @@ The container for the simulate grab logic.
 ##### Declaration
 
 ```
-public GameObject SimulateGrabContainer { get; protected set; }
+public GameObject SimulateGrabContainer { get; set; }
 ```
 
 #### SimulateTouchContainer
@@ -322,7 +322,7 @@ The container for the simulate touch logic.
 ##### Declaration
 
 ```
-public GameObject SimulateTouchContainer { get; protected set; }
+public GameObject SimulateTouchContainer { get; set; }
 ```
 
 #### TargetValidityRules
@@ -332,7 +332,7 @@ The RuleContainerObservableList that controls pointer target validity.
 ##### Declaration
 
 ```
-public RuleContainerObservableList TargetValidityRules { get; protected set; }
+public RuleContainerObservableList TargetValidityRules { get; set; }
 ```
 
 #### UngrabListener
@@ -342,7 +342,7 @@ The EmptyEventProxyEmitter that runs the ungrab logic.
 ##### Declaration
 
 ```
-public EmptyEventProxyEmitter UngrabListener { get; protected set; }
+public EmptyEventProxyEmitter UngrabListener { get; set; }
 ```
 
 ### Methods
