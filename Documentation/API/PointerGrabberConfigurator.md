@@ -6,10 +6,12 @@
 * [Namespace]
 * [Syntax]
 * [Properties]
+  * [DefaultVelocityTracker]
   * [Facade]
   * [GrabOnEnterLogic]
   * [Interactor]
   * [InteractorFollower]
+  * [LengthAxisMultiplierList]
   * [LengthAxisProxy]
   * [Pointer]
   * [TargetValidityRules]
@@ -40,6 +42,16 @@ public class PointerGrabberConfigurator : MonoBehaviour
 ```
 
 ### Properties
+
+#### DefaultVelocityTracker
+
+The default VelocityTracker to use when applying velocity to the Interactor if no Facade.VelocityTracker is provided
+
+##### Declaration
+
+```
+public VelocityTracker DefaultVelocityTracker { get; set; }
+```
 
 #### Facade
 
@@ -79,6 +91,16 @@ The ObjectFollower to make the Interactor follow the Facade.FollowSource.
 
 ```
 public ObjectFollower InteractorFollower { get; set; }
+```
+
+#### LengthAxisMultiplierList
+
+The FloatObservableList that holds the length axis multiplier value.
+
+##### Declaration
+
+```
+public FloatObservableList LengthAxisMultiplierList { get; set; }
 ```
 
 #### LengthAxisProxy
@@ -187,10 +209,12 @@ protected virtual void SetObjectFollowerSource()
 [Namespace]: #Namespace
 [Syntax]: #Syntax
 [Properties]: #Properties
+[DefaultVelocityTracker]: #DefaultVelocityTracker
 [Facade]: #Facade
 [GrabOnEnterLogic]: #GrabOnEnterLogic
 [Interactor]: #Interactor
 [InteractorFollower]: #InteractorFollower
+[LengthAxisMultiplierList]: #LengthAxisMultiplierList
 [LengthAxisProxy]: #LengthAxisProxy
 [Pointer]: #Pointer
 [TargetValidityRules]: #TargetValidityRules

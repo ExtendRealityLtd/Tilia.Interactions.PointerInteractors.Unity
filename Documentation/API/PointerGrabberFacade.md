@@ -14,6 +14,7 @@ The public interface into the PointerGrabber Prefab.
   * [FollowSource]
   * [GrabAction]
   * [LengthAxisAction]
+  * [LengthAxisMultiplier]
   * [RaycastRules]
   * [TargetValidity]
   * [VelocityTracker]
@@ -23,6 +24,7 @@ The public interface into the PointerGrabber Prefab.
   * [OnAfterFollowSourceChange()]
   * [OnAfterGrabActionChange()]
   * [OnAfterLengthAxisActionChange()]
+  * [OnAfterLengthAxisMultiplierChange()]
   * [OnAfterRaycastRulesChange()]
   * [OnAfterTargetValidityChange()]
   * [OnAfterVelocityTrackerChange()]
@@ -106,6 +108,16 @@ The Action control the fixed pointer length.
 public FloatAction LengthAxisAction { get; set; }
 ```
 
+#### LengthAxisMultiplier
+
+The multiplier value of the given length axis input to increase or reduce the speed of the pointer length change.
+
+##### Declaration
+
+```
+public float LengthAxisMultiplier { get; set; }
+```
+
 #### RaycastRules
 
 Determines the rules for the pointer RayCast.
@@ -128,13 +140,17 @@ public RuleContainer TargetValidity { get; set; }
 
 #### VelocityTracker
 
-The [VelocityTracker] to use when applying velocity to the Interactor.
+An optional [VelocityTracker] to use when applying velocity to the Interactor.
 
 ##### Declaration
 
 ```
 public VelocityTracker VelocityTracker { get; set; }
 ```
+
+##### Remarks
+
+If one is not provided then a default [VelocityTracker] will be used that tracks the pointer cursor.
 
 ### Methods
 
@@ -188,6 +204,16 @@ Called after [LengthAxisAction] has been changed.
 protected virtual void OnAfterLengthAxisActionChange()
 ```
 
+#### OnAfterLengthAxisMultiplierChange()
+
+Called after [LengthAxisMultiplier] has been changed.
+
+##### Declaration
+
+```
+protected virtual void OnAfterLengthAxisMultiplierChange()
+```
+
 #### OnAfterRaycastRulesChange()
 
 Called after [RaycastRules] has been changed.
@@ -221,11 +247,13 @@ protected virtual void OnAfterVelocityTrackerChange()
 [Tilia.Interactions.PointerInteractors]: README.md
 [PointerGrabberConfigurator]: PointerGrabberConfigurator.md
 [VelocityTracker]: PointerGrabberFacade.md#VelocityTracker
+[VelocityTracker]: PointerGrabberFacade.md#VelocityTracker
 [ActivationAction]: PointerGrabberFacade.md#ActivationAction
 [AutoGrabOnEnter]: PointerGrabberFacade.md#AutoGrabOnEnter
 [FollowSource]: PointerGrabberFacade.md#FollowSource
 [GrabAction]: PointerGrabberFacade.md#GrabAction
 [LengthAxisAction]: PointerGrabberFacade.md#LengthAxisAction
+[LengthAxisMultiplier]: PointerGrabberFacade.md#LengthAxisMultiplier
 [RaycastRules]: PointerGrabberFacade.md#RaycastRules
 [TargetValidity]: PointerGrabberFacade.md#TargetValidity
 [VelocityTracker]: PointerGrabberFacade.md#VelocityTracker
@@ -239,6 +267,7 @@ protected virtual void OnAfterVelocityTrackerChange()
 [FollowSource]: #FollowSource
 [GrabAction]: #GrabAction
 [LengthAxisAction]: #LengthAxisAction
+[LengthAxisMultiplier]: #LengthAxisMultiplier
 [RaycastRules]: #RaycastRules
 [TargetValidity]: #TargetValidity
 [VelocityTracker]: #VelocityTracker
@@ -248,6 +277,7 @@ protected virtual void OnAfterVelocityTrackerChange()
 [OnAfterFollowSourceChange()]: #OnAfterFollowSourceChange
 [OnAfterGrabActionChange()]: #OnAfterGrabActionChange
 [OnAfterLengthAxisActionChange()]: #OnAfterLengthAxisActionChange
+[OnAfterLengthAxisMultiplierChange()]: #OnAfterLengthAxisMultiplierChange
 [OnAfterRaycastRulesChange()]: #OnAfterRaycastRulesChange
 [OnAfterTargetValidityChange()]: #OnAfterTargetValidityChange
 [OnAfterVelocityTrackerChange()]: #OnAfterVelocityTrackerChange
