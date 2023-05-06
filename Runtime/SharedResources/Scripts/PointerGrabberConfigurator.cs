@@ -5,9 +5,11 @@
     using UnityEngine;
     using Zinnia.Action;
     using Zinnia.Data.Attribute;
+    using Zinnia.Data.Collection.List;
     using Zinnia.Extension;
     using Zinnia.Rule.Collection;
     using Zinnia.Tracking.Follow;
+    using Zinnia.Tracking.Velocity;
 
     public class PointerGrabberConfigurator : MonoBehaviour
     {
@@ -89,6 +91,24 @@
                 lengthAxisProxy = value;
             }
         }
+        [Tooltip("The FloatObservableList that holds the length axis multiplier value.")]
+        [SerializeField]
+        [Restricted]
+        private FloatObservableList lengthAxisMultiplierList;
+        /// <summary>
+        /// The <see cref="FloatObservableList"/> that holds the length axis multiplier value.
+        /// </summary>
+        public FloatObservableList LengthAxisMultiplierList
+        {
+            get
+            {
+                return lengthAxisMultiplierList;
+            }
+            set
+            {
+                lengthAxisMultiplierList = value;
+            }
+        }
         [Tooltip("The RuleContainerObservableList that controls pointer target validity.")]
         [SerializeField]
         [Restricted]
@@ -143,6 +163,24 @@
                 interactorFollower = value;
             }
         }
+        [Tooltip("The default VelocityTracker to use when applying velocity to the Interactor if no Facade.VelocityTracker is provided.")]
+        [SerializeField]
+        [Restricted]
+        private VelocityTracker defaultVelocityTracker;
+        /// <summary>
+        /// The default <see cref="VelocityTracker"/> to use when applying velocity to the Interactor if no <see cref="Facade.VelocityTracker"/> is provided
+        /// </summary>
+        public VelocityTracker DefaultVelocityTracker
+        {
+            get
+            {
+                return defaultVelocityTracker;
+            }
+            set
+            {
+                defaultVelocityTracker = value;
+            }
+        }
         #endregion
 
         /// <summary>
@@ -153,6 +191,7 @@
             Pointer.FollowSource = Facade.FollowSource;
             Pointer.ActivationAction = Facade.ActivationAction;
             LengthAxisProxy.RunWhenActiveAndEnabled(() => SetLengthAxisProxySource());
+            LengthAxisMultiplierList.RunWhenActiveAndEnabled(() => LengthAxisMultiplierList.SetAt(Facade.LengthAxisMultiplier, 1));
             InteractorFollower.Sources.RunWhenActiveAndEnabled(() => SetObjectFollowerSource());
         }
 
@@ -162,7 +201,7 @@
         public virtual void ConfigureInteractor()
         {
             Interactor.GrabAction = Facade.GrabAction;
-            Interactor.VelocityTracker = Facade.VelocityTracker;
+            Interactor.VelocityTracker = Facade.VelocityTracker != null ? Facade.VelocityTracker : DefaultVelocityTracker;
         }
 
         /// <summary>
