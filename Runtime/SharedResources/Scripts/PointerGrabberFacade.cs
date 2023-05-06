@@ -99,12 +99,36 @@
                 }
             }
         }
-        [Tooltip("The VelocityTracker to use when applying velocity to the Interactor.")]
+        [Tooltip("The multiplier value of the given length axis input to increase or reduce the speed of the pointer length change.")]
+        [SerializeField]
+        private float lengthAxisMultiplier = 1f;
+        /// <summary>
+        /// The multiplier value of the given length axis input to increase or reduce the speed of the pointer length change.
+        /// </summary>
+        public float LengthAxisMultiplier
+        {
+            get
+            {
+                return lengthAxisMultiplier;
+            }
+            set
+            {
+                lengthAxisMultiplier = value;
+                if (this.IsMemberChangeAllowed())
+                {
+                    OnAfterLengthAxisMultiplierChange();
+                }
+            }
+        }
+        [Tooltip("An optional VelocityTracker to use when applying velocity to the Interactor.\n\nIf one is not provided then a default VelocityTracker will be used that tracks the pointer cursor.")]
         [SerializeField]
         private VelocityTracker velocityTracker;
         /// <summary>
-        /// The <see cref="VelocityTracker"/> to use when applying velocity to the Interactor.
+        /// An optional <see cref="VelocityTracker"/> to use when applying velocity to the Interactor.
         /// </summary>
+        /// <remarks>
+        /// If one is not provided then a default <see cref="VelocityTracker"/> will be used that tracks the pointer cursor.
+        /// </remarks>
         public VelocityTracker VelocityTracker
         {
             get
@@ -239,6 +263,14 @@
         /// Called after <see cref="LengthAxisAction"/> has been changed.
         /// </summary>
         protected virtual void OnAfterLengthAxisActionChange()
+        {
+            Configuration.ConfigurePointer();
+        }
+
+        /// <summary>
+        /// Called after <see cref="LengthAxisMultiplier"/> has been changed.
+        /// </summary>
+        protected virtual void OnAfterLengthAxisMultiplierChange()
         {
             Configuration.ConfigurePointer();
         }
