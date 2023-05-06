@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v2.2.5...v2.3.0) (2023-05-06)
+
+#### Features
+
+* **preabs:** add axis length multiplier and default velocity tracker ([17a446c](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/17a446cceaefda93b8d18ffc173b380d9a0ca6e3))
+  > The Axis Length now has a multiplier option to control the speed of the pointer length change. There is also a custom velocity tracker on the internal interactor that is used as the default velocity tracker if one isn't provided on the facade.
+
 ### [2.2.5](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v2.2.4...v2.2.5) (2023-05-06)
 
 #### Miscellaneous Chores
