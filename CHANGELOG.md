@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.3.2](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v2.3.1...v2.3.2) (2023-05-06)
+
+#### Bug Fixes
+
+* **Documentation:** add missing documentation ([8a5427f](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/commit/8a5427fff9b08f70a0506e5a733c8dc4ab5cb6f0))
+  > The docs were not auto generated for the new velocity tracker and length axis multiplier, they have now been generated.
+
 ### [2.3.1](https://github.com/ExtendRealityLtd/Tilia.Interactions.PointerInteractors.Unity/compare/v2.3.0...v2.3.1) (2023-05-06)
 
 #### Miscellaneous Chores
