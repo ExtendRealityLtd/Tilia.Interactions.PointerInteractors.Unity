@@ -31,7 +31,7 @@
         "url": "https://github.com/ExtendRealityLtd"
     },
     "dependencies": {
-        "io.extendreality.zinnia.unity": "2.13.0",
+        "io.extendreality.zinnia.unity": "2.14.0",
         "io.extendreality.tilia.utilities.shaders.unity": "1.4.0",
         "io.extendreality.tilia.indicators.objectpointers.unity": "2.2.6",
         "io.extendreality.tilia.interactions.interactables.unity": "2.16.4"
